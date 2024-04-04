@@ -13,6 +13,10 @@ const config: Config = {
         background: "var(--background)",
         primary: "var(--primary)",
         text: "var(--text)",
+        subtext: "var(--subtext)",
+        secondary: "var(--secondary)",
+
+        like: "var(--like)",
       },
       spacing: {
         "global-spacing": "var(--global-spacing)",

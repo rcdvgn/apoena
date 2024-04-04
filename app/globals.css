@@ -18,7 +18,11 @@ body,
   --foreground: #ffffff;
   --background: #f6f6f6;
   --primary: #316728;
+  --secondary: #dddddd;
   --text: #121212;
+  --subtext: #363636;
+
+  --like: #ec3131;
 
   --global-spacing: 2rem;
 }
