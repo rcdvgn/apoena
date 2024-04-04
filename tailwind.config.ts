@@ -12,6 +12,7 @@ const config: Config = {
         foreground: "var(--foreground)",
         background: "var(--background)",
         primary: "var(--primary)",
+        "faded-primary": "var(--faded-primary)",
         text: "var(--text)",
         subtext: "var(--subtext)",
         secondary: "var(--secondary)",
@@ -23,6 +24,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
 export default config;

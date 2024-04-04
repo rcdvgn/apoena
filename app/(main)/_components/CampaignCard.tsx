@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useRef, useState, useEffect } from "react";
 
 import {
   TagIcon,
@@ -29,25 +31,60 @@ interface Campaign {
 }
 
 export default function CampaignCard({ campaign }: { campaign: Campaign }) {
-  return (
-    <div className="container h-auto p-6">
-      <div className="flex justify-start gap-4 mb-6">
-        <span className="flex items-center gap-1 text-primary font-semibold text-xs">
-          <TagIcon className="fill-primary h-3" />
-          {campaign.type}
-        </span>
+  const [fundsBarWidth, setFundsBarWidth] = useState(0);
 
+  const fundsBar = useRef<HTMLDivElement>(null);
+
+  const limitDescription = (desc: string) => {
+    return desc.substring(0, 210) + "...";
+  };
+
+  useEffect(() => {
+    const updateFundsBarWidth = () => {
+      if (fundsBar.current) {
+        setFundsBarWidth(fundsBar.current.offsetWidth);
+      }
+    };
+
+    updateFundsBarWidth();
+
+    window.addEventListener("resize", updateFundsBarWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateFundsBarWidth);
+    };
+  }, []);
+
+  return (
+    <div className="container h-auto p-6  w-[45vw]">
+      <div className="flex justify-start gap-4 mb-6">
         <span className="flex items-center gap-1 text-primary font-semibold text-xs">
           <PinIcon className="fill-primary h-3" />
           {campaign.affectedRegion}
         </span>
 
         <span className="flex items-center gap-1 text-primary font-semibold text-xs">
+          <TagIcon className="fill-primary h-3" />
+          {campaign.type}
+        </span>
+
+        <span className="flex items-center gap-1 text-primary font-semibold text-xs">
           <SupportersIcon className="fill-primary h-3" />
           {campaign.supporters}
         </span>
-        <div className="grid place-items-center bg-primary rounded-full grow font-medium text-foreground text-[11px]">
-          ${campaign.raised} / ${campaign.goal}
+        <div
+          ref={fundsBar}
+          className="relative bg-faded-primary rounded-full grow font-medium text-foreground text-[11px]"
+        >
+          <div
+            style={{
+              width: `${(campaign.raised * fundsBarWidth) / campaign.goal}px`,
+            }}
+            className="h-full rounded-full left-0 bg-primary "
+          ></div>
+          <span className="absolute h-full w-full text-center top-0 left-0">
+            ${campaign.raised} / ${campaign.goal}
+          </span>
         </div>
       </div>
       <div className="flex items-start gap-4 mb-4">
@@ -56,13 +93,13 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           className="rounded-lg h-16 w-16 bg-cover bg-center flex-shrink-0"
         ></div>
         <div>
-          <span className="text-base font-semibold text-text">
+          <span className="text-base font-medium text-text">
             {campaign.title}
           </span>
-          <div className="flex items-center gap-1.5 mt-1">
+          <div className="flex items-center gap-1.5 mt-2">
             <div
               style={{ backgroundImage: `url(${campaign.ownerPictureUrl})` }}
-              className="h-7 w-7 rounded-full bg-cover bg-center border-2 flex-shrink-0"
+              className="h-7 w-7 rounded-full bg-cover bg-center flex-shrink-0"
             ></div>
             <span className="font-semibold text-xs text-text">
               {campaign.owner}
@@ -81,9 +118,32 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           </button>
         </div>
       </div>
-      <div>
-        <div>{campaign.description}</div>
-        <div>{campaign.additionalPhotos.length}</div>
+      <div className="flex">
+        <div className="font-medium text-sm text-text leading-6 line-clamp-2">
+          {campaign.description}
+        </div>
+        <div className="px-4 flex">
+          {campaign.additionalPhotos.map((photo, index) => {
+            if (index < 2) {
+              return (
+                <div
+                  key={index}
+                  style={{ backgroundImage: `url(${photo})` }}
+                  className="mr-[-1.5rem] rounded-md h-12 w-12 bg-cover bg-center flex-shrink-0 border-2 border-foreground"
+                ></div>
+              );
+            } else if (index === 2) {
+              return (
+                <div
+                  key={index}
+                  className="grid place-items-center rounded-md h-12 w-12 bg-secondary bg-center flex-shrink-0 border-2 border-foreground font-semibold text-substext text-lg"
+                >
+                  +{campaign.additionalPhotos.length - 2}
+                </div>
+              );
+            }
+          })}
+        </div>
       </div>
       <div>
         <div>{campaign.createdIn}</div>

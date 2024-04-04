@@ -8,10 +8,10 @@ import { campaigns } from "./data";
 
 export default function Feed() {
   return (
-    <div className="max-w-[70rem] p-global-spacing">
+    <div className="px-global-spacing">
       <Filters />
       <div className="flex items-start justify-between gap-global-spacing">
-        <div className="flex grow flex-col gap-global-spacing">
+        <div className="flex flex-col gap-global-spacing">
           {campaigns.map((item, index) => {
             return <CampaignCard key={index} campaign={item} />;
           })}
