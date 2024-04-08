@@ -10,13 +10,15 @@ export default function Feed() {
   return (
     <div className="px-global-spacing">
       <Filters />
-      <div className="flex items-start justify-between gap-global-spacing">
+      <div className="flex gap-global-spacing">
         <div className="flex flex-col gap-global-spacing">
           {campaigns.map((item, index) => {
             return <CampaignCard key={index} campaign={item} />;
           })}
         </div>
-        <CampaignDetails />
+        <div className="w-[30rem] h-auto border-2 border-red-500">
+          {/* <CampaignDetails /> */}
+        </div>
       </div>
     </div>
   );

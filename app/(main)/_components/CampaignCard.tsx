@@ -56,7 +56,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
   }, []);
 
   return (
-    <div className="container h-auto p-6  w-[45vw]">
+    <div className="container h-auto p-6 w-[45rem]">
       <div className="flex justify-start gap-4 mb-6">
         <span className="flex items-center gap-1 text-primary font-semibold text-xs">
           <PinIcon className="fill-primary h-3" />
@@ -93,10 +93,10 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           className="rounded-lg h-16 w-16 bg-cover bg-center flex-shrink-0"
         ></div>
         <div>
-          <span className="text-base font-medium text-text">
+          <span className="text-base font-semibold text-text">
             {campaign.title}
           </span>
-          <div className="flex items-center gap-1.5 mt-2">
+          <div className="flex items-center gap-1.5 mt-1.5">
             <div
               style={{ backgroundImage: `url(${campaign.ownerPictureUrl})` }}
               className="h-7 w-7 rounded-full bg-cover bg-center flex-shrink-0"
@@ -113,13 +113,13 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           <button className="group grid place-items-center h-full w-11 bg-secondary rounded-lg">
             <HeartIcon className="stroke-subtext stroke-2 w-5 group-hover:stroke-like group-hover:fill-like" />
           </button>
-          <button className="bg-primary text-foreground text-sm font-semibold rounded-lg px-6 h-full hover:opacity-[0.8]">
+          <button className="bg-primary text-foreground text-sm font-semibold rounded-lg px-8 h-full hover:opacity-[0.8]">
             Contribuir
           </button>
         </div>
       </div>
       <div className="flex">
-        <div className="font-medium text-sm text-text leading-6 line-clamp-2">
+        <div className="font-semibold text-xs text-text leading-6 line-clamp-2">
           {campaign.description}
         </div>
         <div className="px-4 flex">
@@ -136,9 +136,11 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
               return (
                 <div
                   key={index}
-                  className="grid place-items-center rounded-md h-12 w-12 bg-secondary bg-center flex-shrink-0 border-2 border-foreground font-semibold text-substext text-lg"
+                  className="grid place-items-center rounded-md h-12 w-12 bg-secondary bg-center flex-shrink-0 border-2 border-foreground"
                 >
-                  +{campaign.additionalPhotos.length - 2}
+                  <span className="font-semibold text-subtext text-lg">
+                    +{campaign.additionalPhotos.length - 2}
+                  </span>
                 </div>
               );
             }

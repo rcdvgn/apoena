@@ -21,7 +21,7 @@ body,
   --faded-primary: #6f9569;
   --secondary: #dddddd;
   --text: #121212;
-  --subtext: #363636;
+  --subtext: #444444;
 
   --like: #ec3131;
 
@@ -30,6 +30,6 @@ body,
 
 @layer components {
   .container {
-    @apply h-[20rem] bg-foreground shadow-md rounded-2xl p-6;
+    @apply bg-foreground shadow-md rounded-2xl p-6;
   }
 }
