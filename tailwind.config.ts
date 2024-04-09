@@ -9,15 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        foreground: "var(--foreground)",
-        background: "var(--background)",
-        primary: "var(--primary)",
-        "faded-primary": "var(--faded-primary)",
-        text: "var(--text)",
-        subtext: "var(--subtext)",
-        secondary: "var(--secondary)",
+        foreground: "rgb(var(--color-foreground) / <alpha-value>)",
+        background: "rgb(var(--color-background) / <alpha-value>)",
+        primary: "rgb(var(--color-primary) / <alpha-value>)",
+        text: "rgb(var(--color-text) / <alpha-value>)",
+        subtext: "rgb(var(--color-subtext) / <alpha-value>)",
+        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
 
-        like: "var(--like)",
+        like: "rgb(var(--color-like) / <alpha-value>)",
+        comment: "rgb(var(--color-comment) / <alpha-value>)",
+        save: "rgb(var(--color-save) / <alpha-value>)",
+        share: "rgb(var(--color-share) / <alpha-value>)",
       },
       spacing: {
         "global-spacing": "var(--global-spacing)",

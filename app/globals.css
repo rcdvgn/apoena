@@ -15,21 +15,23 @@ body,
 }
 
 :root {
-  --foreground: #ffffff;
-  --background: #f6f6f6;
-  --primary: #316728;
-  --faded-primary: #6f9569;
-  --secondary: #dddddd;
-  --text: #121212;
-  --subtext: #363636;
+  --foreground: 255 255 255;
+  --background: 234 245 251;
+  --primary: 49 174 236;
+  --secondary: 230 230 230;
+  --text: 54 54 54;
+  --subtext: 79 79 79;
 
-  --like: #ec3131;
+  --like: 255 51 51;
+  --comment: 75 236 49;
+  --save: 49 112 236;
+  --share: 236 184 49;
 
   --global-spacing: 2rem;
 }
 
 @layer components {
   .container {
-    @apply h-[20rem] bg-foreground shadow-md rounded-2xl p-6;
+    @apply bg-foreground shadow-md rounded-2xl;
   }
 }
