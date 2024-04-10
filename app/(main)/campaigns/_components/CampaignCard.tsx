@@ -69,7 +69,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
     text: any;
   }) => {
     return (
-      <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 flex-shrink-0">
+      <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 flex-shrink-0">
         {icon}
         <span className="text-primary font-bold text-xs">{text}</span>
       </div>
@@ -136,7 +136,9 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
         <div className="text-sm leading-6">
           <span className="line-clamp-3 font-semibold text-subtext">
             {limitDescription(campaign.description) + " "}
-            <span className="underline text-primary font-bold">Ler mais</span>
+            <span className="underline text-primary font-bold cursor-pointer">
+              Ler mais
+            </span>
           </span>
         </div>
         <div className="flex">
@@ -175,10 +177,14 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           </div>
           <span className=""></span>
         </div>
-        <div className="bg-secondary p-1.5 rounded-[5px] flex items-center gap-1">
-          <AdIcon className="fill-subtext h-3" />
-          <span className="text-subtext font-semibold text-xs">Anuncio</span>
-        </div>
+        {campaign.isAd ? (
+          <div className="bg-secondary p-1.5 rounded-[5px] flex items-center gap-1">
+            <AdIcon className="fill-subtext h-3" />
+            <span className="text-subtext font-semibold text-xs">Anuncio</span>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <div className="flex justify-between border-t-2 border-background px-4 py-2">
         <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
