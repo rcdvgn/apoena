@@ -6,10 +6,16 @@ import {
   TagIcon,
   PinIcon,
   SupportersIcon,
-  MoreIcon,
-  HeartIcon,
   CreatedInIcon,
   InfoIcon,
+  FullScreenIcon,
+  CurrencyIcon,
+  AdIcon,
+  HeartIcon,
+  CommentIcon,
+  SaveIcon,
+  ShareIcon,
+  MoreIcon,
 } from "../_icons/icons";
 
 interface Campaign {
@@ -35,8 +41,8 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
 
   const fundsBar = useRef<HTMLDivElement>(null);
 
-  const limitDescription = (desc: string) => {
-    return desc.substring(0, 210) + "...";
+  const limitDescription = (description: string) => {
+    return description.substring(0, 150) + "...";
   };
 
   useEffect(() => {
@@ -55,74 +61,85 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
     };
   }, []);
 
-  return (
-    <div className="container h-auto p-6 w-[45rem]">
-      <div className="flex justify-start gap-4 mb-6">
-        <span className="flex items-center gap-1 text-primary font-semibold text-xs">
-          <PinIcon className="fill-primary h-3" />
-          {campaign.affectedRegion}
-        </span>
-
-        <span className="flex items-center gap-1 text-primary font-semibold text-xs">
-          <TagIcon className="fill-primary h-3" />
-          {campaign.type}
-        </span>
-
-        <span className="flex items-center gap-1 text-primary font-semibold text-xs">
-          <SupportersIcon className="fill-primary h-3" />
-          {campaign.supporters}
-        </span>
-        <div
-          ref={fundsBar}
-          className="relative bg-faded-primary rounded-full grow font-medium text-foreground text-[11px]"
-        >
-          <div
-            style={{
-              width: `${(campaign.raised * fundsBarWidth) / campaign.goal}px`,
-            }}
-            className="h-full rounded-full left-0 bg-primary "
-          ></div>
-          <span className="absolute h-full w-full text-center top-0 left-0">
-            ${campaign.raised} / ${campaign.goal}
-          </span>
-        </div>
+  const CampaignLabel = ({
+    icon,
+    text,
+  }: {
+    icon: React.ReactNode;
+    text: any;
+  }) => {
+    return (
+      <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 flex-shrink-0">
+        {icon}
+        <span className="text-primary font-bold text-xs">{text}</span>
       </div>
-      <div className="flex items-start gap-4 mb-4">
+    );
+  };
+
+  return (
+    <div ref={fundsBar} className="container h-auto w-full">
+      <div className="flex items-center h-[65px] px-4 py-3 ">
         <div
           style={{ backgroundImage: `url(${campaign.pictureUrl})` }}
-          className="rounded-lg h-16 w-16 bg-cover bg-center flex-shrink-0"
-        ></div>
-        <div>
-          <span className="text-base font-semibold text-text">
-            {campaign.title}
-          </span>
-          <div className="flex items-center gap-1.5 mt-1.5">
-            <div
-              style={{ backgroundImage: `url(${campaign.ownerPictureUrl})` }}
-              className="h-7 w-7 rounded-full bg-cover bg-center flex-shrink-0"
-            ></div>
-            <span className="font-semibold text-xs text-text">
-              {campaign.owner}
-            </span>
+          className="group relative mr-4 rounded-lg h-full aspect-square bg-cover bg-center flex-shrink-0 overflow-hidden cursor-pointer"
+        >
+          <div className="bg-black/30 h-full w-full top-0 left-0 absolute grid place-items-center invisible group-hover:visible">
+            <FullScreenIcon className="fill-foreground h-5" />
           </div>
         </div>
-        <div className="flex ml-auto gap-2 h-11">
-          {/* <button className="grid place-items-center h-10 w-10 bg-secondary rounded-lg ">
-            <MoreIcon className="fill-subtext w-5" />
-          </button> */}
-          <button className="group grid place-items-center h-full w-11 bg-secondary rounded-lg">
-            <HeartIcon className="stroke-subtext stroke-2 w-5 group-hover:stroke-like group-hover:fill-like" />
-          </button>
-          <button className="bg-primary text-foreground text-sm font-semibold rounded-lg px-8 h-full hover:opacity-[0.8]">
-            Contribuir
-          </button>
+        <div className="font-semibold text-[15px] text-text min-w-0 line-clamp-2 mr-5">
+          {campaign.title}
+        </div>
+        <button className="bg-primary px-[15px] py-2.5 rounded-full font-bold text-sm text-foreground ml-auto">
+          Contribuir
+        </button>
+      </div>
+      <div className="h-[2px] bg-primary/50 rounded-full">
+        <div
+          style={{
+            width: `${(campaign.raised * fundsBarWidth) / campaign.goal}px`,
+          }}
+          className="h-full bg-primary rounded-full"
+        ></div>
+      </div>
+      <div className="relative h-[4rem] overflow-hidden mx-4">
+        <div className="absolute left-0 top-0 bottom-0 h-full min-w-full flex gap-3 justify-between items-center">
+          <CampaignLabel
+            icon={
+              <CurrencyIcon className="fill-primary h-[14px] flex-shrink-0" />
+            }
+            text={`R$${Intl.NumberFormat("pt-BR", {
+              notation: "compact",
+              maximumFractionDigits: 1,
+            }).format(campaign.raised)} / R$${Intl.NumberFormat("pt-BR", {
+              notation: "compact",
+              maximumFractionDigits: 1,
+            }).format(campaign.goal)}`}
+          />
+          <CampaignLabel
+            icon={<PinIcon className="fill-primary h-[14px] flex-shrink-0" />}
+            text={campaign.affectedRegion}
+          />
+          <CampaignLabel
+            icon={<TagIcon className="fill-primary h-[14px] flex-shrink-0" />}
+            text={campaign.type}
+          />
+          <CampaignLabel
+            icon={
+              <SupportersIcon className="fill-primary h-[14px] flex-shrink-0" />
+            }
+            text={campaign.supporters}
+          />
         </div>
       </div>
-      <div className="flex">
-        <div className="font-semibold text-xs text-text leading-6 line-clamp-2">
-          {campaign.description}
+      <div className="flex px-4 pt-2 pb-4 gap-4">
+        <div className="text-sm leading-6">
+          <span className="line-clamp-3 font-semibold text-subtext">
+            {limitDescription(campaign.description) + " "}
+            <span className="underline text-primary font-bold">Ler mais</span>
+          </span>
         </div>
-        <div className="px-4 flex">
+        <div className="flex">
           {campaign.additionalPhotos.map((photo, index) => {
             if (index < 2) {
               return (
@@ -136,20 +153,55 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
               return (
                 <div
                   key={index}
-                  className="grid place-items-center rounded-md h-12 w-12 bg-secondary bg-center flex-shrink-0 border-2 border-foreground"
+                  className="grid place-items-center rounded-md h-12 w-12 bg-secondary bg-center flex-shrink-0 border-2 border-foreground font-semibold text-substext text-md"
                 >
-                  <span className="font-semibold text-subtext text-lg">
-                    +{campaign.additionalPhotos.length - 2}
-                  </span>
+                  +{campaign.additionalPhotos.length - 2}
                 </div>
               );
             }
           })}
         </div>
       </div>
-      <div>
-        <div>{campaign.createdIn}</div>
-        <div>{campaign.isAd ? "Ad" : ""}</div>
+      <div className="flex items-center justify-between px-4 p-4">
+        <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            <div
+              style={{ backgroundImage: `url(${campaign.ownerPictureUrl})` }}
+              className="rounded-full h-7 w-7 bg-cover bg-center flex-shrink-0"
+            ></div>
+            <span className="text-text font-semibold text-xs">
+              {campaign.owner}
+            </span>
+          </div>
+          <span className=""></span>
+        </div>
+        <div className="bg-secondary p-1.5 rounded-[5px] flex items-center gap-1">
+          <AdIcon className="fill-subtext h-3" />
+          <span className="text-subtext font-semibold text-xs">Anuncio</span>
+        </div>
+      </div>
+      <div className="flex justify-between border-t-2 border-background px-4 py-2">
+        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-like/10 group-hover:h-full"></div>
+          <HeartIcon className="fill-like h-3 overflow-visible" />
+        </div>
+        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-comment/10 group-hover:h-full"></div>
+          <CommentIcon className="fill-comment h-3" />
+        </div>
+        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-save/10 group-hover:h-full"></div>
+          <SaveIcon className="fill-save h-3" />
+        </div>
+        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-share/10 group-hover:h-full"></div>
+          <ShareIcon className="fill-share h-3" />
+        </div>
+
+        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-subtext/10 group-hover:h-full"></div>
+          <MoreIcon className="fill-subtext w-4" />
+        </div>
       </div>
     </div>
   );

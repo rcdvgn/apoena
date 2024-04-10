@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "./_components/Navbar";
 
-const poppins = DM_Sans({
+const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-poppins",

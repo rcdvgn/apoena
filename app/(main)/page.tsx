@@ -8,16 +8,16 @@ import { campaigns } from "./data";
 
 export default function Feed() {
   return (
-    <div className="px-global-spacing">
+    <div className="px-global-spacing w-full max-w-[65rem] border-2 border-yellow-500">
       <Filters />
       <div className="flex gap-global-spacing">
-        <div className="flex flex-col gap-global-spacing">
+        <div className="flex flex-col grow gap-global-spacing">
           {campaigns.map((item, index) => {
             return <CampaignCard key={index} campaign={item} />;
           })}
         </div>
-        <div className="w-[30rem] h-auto border-2 border-red-500">
-          {/* <CampaignDetails /> */}
+        <div className="flex-shrink-0 w-[20rem] h-auto border-2 border-red-500">
+          <CampaignDetails />
         </div>
       </div>
     </div>
