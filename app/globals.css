@@ -36,4 +36,12 @@ body,
   .container {
     @apply bg-foreground shadow-md rounded-2xl;
   }
+
+  .btn-1 {
+    @apply rounded-full bg-primary text-foreground font-semibold hover:opacity-80;
+  }
+
+  .input-1 {
+    @apply rounded-md px-3 border-2 outline-none border-secondary bg-transparent text-text font-medium text-sm focus:border-primary;
+  }
 }
