@@ -30,7 +30,7 @@ interface AuthContextValue {
 }
 
 const AuthContext = createContext<AuthContextValue>({
-  user: "",
+  user: null,
   signInWithEmail: () => Promise.resolve(),
   signUpWithEmail: () => Promise.resolve(),
   signOff: () => Promise.resolve(),
@@ -39,10 +39,7 @@ const AuthContext = createContext<AuthContextValue>({
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
-  const [user, setUser] = useState<any>({
-    age: 25,
-    email: "ricardorpvigliano@gmail.com",
-  });
+  const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   const signUpWithEmail = async (email: any, password: any) => {
