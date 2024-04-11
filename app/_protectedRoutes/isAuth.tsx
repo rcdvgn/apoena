@@ -12,7 +12,7 @@ export default function IsAuth({ children }: any) {
     if (!user) {
       router.push("/sign-in");
     } else if (!user.name) {
-      router.push("/create-account");
+      router.push("/onboarding");
     }
   }, [user, router]);
 

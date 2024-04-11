@@ -37,7 +37,7 @@ const AuthContext = createContext<AuthContextValue>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
+  // const router = useRouter();
 
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);

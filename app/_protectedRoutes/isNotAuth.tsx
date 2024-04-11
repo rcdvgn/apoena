@@ -14,7 +14,7 @@ export default function IsNotAuth({ children }: any) {
       if (user.name) {
         router.push("/campaigns");
       } else {
-        router.push("/create-account");
+        router.push("/onboarding");
       }
     }
   }, [user, router]);
