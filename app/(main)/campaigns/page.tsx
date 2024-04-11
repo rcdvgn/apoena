@@ -1,14 +1,14 @@
 import React from "react";
 
-import Filters from "./_components/Filters";
-import CampaignCard from "./_components/CampaignCard";
-import CampaignDetails from "./_components/CampaignDetails";
+import Filters from "./components/Filters";
+import CampaignCard from "./components/CampaignCard";
+import CampaignDetails from "./components/CampaignDetails";
 
 import { campaigns } from "./data";
 
-export default function Feed() {
+export default function Campaigns() {
   return (
-    <div className="px-global-spacing w-full max-w-[65rem] border-2 border-yellow-500">
+    <div className="px-global-spacing w-full max-w-[65rem]">
       <Filters />
       <div className="flex gap-global-spacing">
         <div className="flex flex-col grow gap-global-spacing">
@@ -16,7 +16,7 @@ export default function Feed() {
             return <CampaignCard key={index} campaign={item} />;
           })}
         </div>
-        <div className="flex-shrink-0 w-[20rem] h-auto border-2 border-red-500">
+        <div className="flex-shrink-0 w-[20rem] h-auto">
           <CampaignDetails />
         </div>
       </div>

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 
-import IsAuth from "./_components/IsAuth";
-
-import Navbar from "../_components/Navbar";
+import { AuthProvider } from "./_contexts/AuthContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,11 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <IsAuth>
-      <div className="min-h-lvh flex flex-col items-center bg-background">
-        <Navbar />
+    <html lang="en">
+      <body className={poppins.className}>
+        {/* <AuthProvider> */}
         {children}
-      </div>
-    </IsAuth>
+        {/* </AuthProvider> */}
+      </body>
+    </html>
   );
 }

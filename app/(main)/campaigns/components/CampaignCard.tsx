@@ -94,7 +94,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           Contribuir
         </button>
       </div>
-      <div className="h-[2px] bg-primary/50 rounded-full">
+      <div className="h-[2px] bg-primary/30 rounded-full">
         <div
           style={{
             width: `${(campaign.raised * fundsBarWidth) / campaign.goal}px`,
@@ -132,11 +132,11 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           />
         </div>
       </div>
-      <div className="flex px-4 pt-2 pb-4 gap-4">
-        <div className="text-sm leading-6">
-          <span className="line-clamp-3 font-semibold text-subtext">
+      <div className="flex px-4 p-2 gap-4">
+        <div className="text-[13px] leading-6">
+          <span className="line-clamp-3 font-semibold text-text">
             {limitDescription(campaign.description) + " "}
-            <span className="underline text-primary font-bold cursor-pointer">
+            <span className="hover:underline text-primary font-bold cursor-pointer">
               Ler mais
             </span>
           </span>
@@ -164,9 +164,9 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           })}
         </div>
       </div>
-      <div className="flex items-center justify-between px-4 p-4">
+      <div className="flex items-center justify-between p-4">
         <div className="flex items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 cursor-pointer hover:underline">
             <div
               style={{ backgroundImage: `url(${campaign.ownerPictureUrl})` }}
               className="rounded-full h-7 w-7 bg-cover bg-center flex-shrink-0"
@@ -178,30 +178,44 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           <span className=""></span>
         </div>
         {campaign.isAd ? (
-          <div className="bg-secondary p-1.5 rounded-[5px] flex items-center gap-1">
-            <AdIcon className="fill-subtext h-3" />
-            <span className="text-subtext font-semibold text-xs">Anuncio</span>
+          <div className="bg-secondary p-1 rounded-[3px] flex items-center gap-1">
+            <AdIcon className="fill-subtext h-2.5" />
+            <span className="text-subtext font-semibold text-[10px]">
+              Anuncio
+            </span>
           </div>
         ) : (
           ""
         )}
       </div>
       <div className="flex justify-between border-t-2 border-background px-4 py-2">
-        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
-          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-like/10 group-hover:h-full"></div>
-          <HeartIcon className="fill-like h-3 overflow-visible" />
+        <div className="flex flex-row-reverse items-center gap-1">
+          <span className="text-xs font-bold text-like">24</span>
+          <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+            <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-like/10 group-hover:h-full"></div>
+            <HeartIcon className="fill-like h-3 overflow-visible" />
+          </div>
         </div>
-        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
-          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-comment/10 group-hover:h-full"></div>
-          <CommentIcon className="fill-comment h-3" />
+        <div className="flex flex-row-reverse items-center gap-1">
+          <span className="text-xs font-bold text-comment">24</span>
+          <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+            <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-comment/10 group-hover:h-full"></div>
+            <CommentIcon className="fill-comment h-3" />
+          </div>
         </div>
-        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
-          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-save/10 group-hover:h-full"></div>
-          <SaveIcon className="fill-save h-3" />
+        <div className="flex flex-row-reverse items-center gap-1">
+          <span className="text-xs font-bold text-save">24</span>
+          <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+            <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-save/10 group-hover:h-full"></div>
+            <SaveIcon className="fill-save h-3" />
+          </div>
         </div>
-        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
-          <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-share/10 group-hover:h-full"></div>
-          <ShareIcon className="fill-share h-3" />
+        <div className="flex flex-row-reverse items-center gap-1">
+          <span className="text-xs font-bold text-share">24</span>
+          <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+            <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-share/10 group-hover:h-full"></div>
+            <ShareIcon className="fill-share h-3" />
+          </div>
         </div>
 
         <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">

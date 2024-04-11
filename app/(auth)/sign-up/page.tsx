@@ -1,8 +1,35 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+
+import { useAuth } from "../../_contexts/AuthContext";
+import { redirect } from "next/navigation";
 
 export default function SignUp() {
+  const { signUpWithEmail } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailChange = (e: any) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    await signUpWithEmail(email, password);
+  };
+
   return (
-    <div className="container flex flex-col gap-10 px-8 py-10 w-auto">
+    <form
+      onSubmit={handleSubmit}
+      className="container flex flex-col gap-10 px-8 py-10 w-auto"
+    >
       <div className="flex justify-between">
         <span className="text-primary font-black text-xl">Apoena</span>
         <span className="font-semibold text-subtext text-lg">Criar conta</span>
@@ -12,6 +39,8 @@ export default function SignUp() {
           <span className="text-text font-semibold text-base">Email</span>
           <div className="">
             <input
+              value={email}
+              onChange={handleEmailChange}
               type="email"
               spellCheck="false"
               placeholder="Seu melhor email"
@@ -23,6 +52,8 @@ export default function SignUp() {
           <span className="text-text font-semibold text-base">Senha</span>
           <div className="">
             <input
+              value={password}
+              onChange={handlePasswordChange}
               type="password"
               placeholder="Crie uma senha"
               className="w-[400px] h-12 input-1"
@@ -30,10 +61,11 @@ export default function SignUp() {
           </div>
         </div>
       </div>
-
       <div className="">
-        <button className="w-full h-12 btn-1">Criar conta</button>
+        <button type="submit" className="w-full h-12 btn-1">
+          Criar conta
+        </button>
       </div>
-    </div>
+    </form>
   );
 }
