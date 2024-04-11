@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 
-import IsNotAuth from "../_protectedRoutes/isNotAuth";
+import IsNotUser from "../_protectedRoutes/isNotUser";
 
 export default function RootLayout({
   children,
@@ -9,10 +9,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <IsNotAuth>
+    <IsNotUser>
       <div className="flex items-center justify-center min-h-lvh bg-background">
         {children}
       </div>
-    </IsNotAuth>
+    </IsNotUser>
   );
 }

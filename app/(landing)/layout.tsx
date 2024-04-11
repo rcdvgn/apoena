@@ -1,4 +1,4 @@
-import IsNotAuth from "../_components/IsNotAuth";
+import IsNotAuth from "../_protectedRoutes/isNotAuth";
 
 export const metadata = {
   title: "Next.js",
@@ -10,6 +10,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return;
-  <IsNotAuth>{children}</IsNotAuth>;
+  return <IsNotAuth>{children}</IsNotAuth>;
 }
