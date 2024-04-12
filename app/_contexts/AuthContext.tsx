@@ -1,18 +1,10 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
-import { User } from "../_types/global";
+// import { User } from "../_types/global";
 
-import {
-  collection,
-  setDoc,
-  getDoc,
-  doc,
-  Timestamp,
-  onSnapshot,
-} from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { auth, db } from "../_config/firebase";
 
 import {
@@ -24,6 +16,7 @@ import {
 
 interface AuthContextValue {
   user: any;
+  setUser: (user: any) => void;
   signInWithEmail: (email: any, password: any) => Promise<void>;
   signUpWithEmail: (email: any, password: any) => Promise<void>;
   signOff: () => Promise<void>;
@@ -31,6 +24,7 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue>({
   user: null,
+  setUser: () => {},
   signInWithEmail: () => Promise.resolve(),
   signUpWithEmail: () => Promise.resolve(),
   signOff: () => Promise.resolve(),
@@ -78,6 +72,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
+      // console.log("start: " + user);
       if (currUser) {
         const userRef = doc(db, "users", currUser.uid);
         const userDoc = await getDoc(userRef);
@@ -91,6 +86,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } else {
         setUser(null);
       }
+      console.log("finished loading");
       setLoading(false);
     });
 
@@ -101,6 +97,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         signInWithEmail,
         signUpWithEmail,
         signOff,

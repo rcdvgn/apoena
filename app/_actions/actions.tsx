@@ -9,10 +9,23 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-import { auth, db } from "../_config/firebase";
+import { db } from "../_config/firebase";
 
-// export const createUser = () => {
-//     const newUser = {
-//         name:
-//     }
-// }
+export async function createUser(userData: any) {
+  try {
+    const newUser = {
+      uid: userData.uid,
+      name: userData.name,
+      email: userData.email,
+      isVerified: false,
+      createdIn: Timestamp.now(),
+    };
+
+    const docRef = doc(collection(db, "users"), userData.uid);
+    await setDoc(docRef, newUser);
+
+    return newUser;
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}

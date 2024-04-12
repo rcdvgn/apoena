@@ -1,16 +1,23 @@
 "use client";
 import React, { useState } from "react";
 
+import { useAuth } from "../../_contexts/AuthContext";
+
+import { createUser } from "../../_actions/actions";
+
 export default function CreateAccount() {
+  const { user, setUser } = useAuth();
   const [name, setName] = useState("");
 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
-    console.log(name);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    const newUser = await createUser({ ...user, name });
+    setUser(newUser);
   };
 
   return (
