@@ -5,7 +5,7 @@ import Searchbar from "./Searchbar";
 
 export default function Navbar() {
   return (
-    <div className="flex gap-16 justify-between items-center px-8 h-16 w-full bg-gradient-to-r from-primary-light via-primary to-primary-dark">
+    <div className="z-10 sticky top-0 flex gap-16 justify-between items-center px-8 h-16 w-full bg-gradient-to-r from-primary-light via-primary to-primary-dark">
       <span className="text-foreground font-black text-xl mt-[-7px]">
         Apoena
       </span>

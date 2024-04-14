@@ -79,7 +79,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
   return (
     <div
       ref={fundsBar}
-      className="container h-auto w-full hover:shadow-md transition-all ease-in-out"
+      className="container h-auto w-full hover:shadow-md hover:bg-foreground/50 transition-all ease-in-out"
     >
       <div className="flex items-center h-[65px] px-4 py-3 ">
         <div
