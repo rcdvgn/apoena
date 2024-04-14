@@ -16,5 +16,5 @@ export default function IsAuth({ children }: any) {
     }
   }, [user, router]);
 
-  return user.name ? children : null;
+  return user?.name ? children : null;
 }

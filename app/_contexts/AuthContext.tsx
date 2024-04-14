@@ -15,6 +15,7 @@ import {
 } from "firebase/auth";
 
 interface AuthContextValue {
+  loading: boolean;
   user: any;
   setUser: (user: any) => void;
   signInWithEmail: (email: any, password: any) => Promise<void>;
@@ -23,6 +24,7 @@ interface AuthContextValue {
 }
 
 const AuthContext = createContext<AuthContextValue>({
+  loading: true,
   user: null,
   setUser: () => {},
   signInWithEmail: () => Promise.resolve(),
@@ -71,8 +73,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
+    console.log("entered useEffect");
     const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
-      // console.log("start: " + user);
+      console.log("entered unsubscribe");
       if (currUser) {
         const userRef = doc(db, "users", currUser.uid);
         const userDoc = await getDoc(userRef);
@@ -86,7 +89,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } else {
         setUser(null);
       }
-      console.log("finished loading");
+      console.log("exited data fetching");
       setLoading(false);
     });
 
@@ -96,6 +99,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <AuthContext.Provider
       value={{
+        loading,
         user,
         setUser,
         signInWithEmail,
@@ -103,7 +107,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         signOff,
       }}
     >
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -17,8 +17,10 @@ body,
 @layer base {
   :root {
     --foreground: 255 255 255;
-    --background: 234 245 251;
+    --background: 237 244 247;
     --primary: 49 174 236;
+    --primary-light: 39 173 211;
+    --primary-dark: 40 140 225;
     --secondary: 230 230 230;
     --text: 54 54 54;
     --subtext: 79 79 79;
@@ -34,9 +36,9 @@ body,
 
 @layer components {
   .container {
-    @apply bg-foreground shadow-md rounded-2xl;
+    @apply bg-foreground rounded-2xl;
   }
-
+  /* hover:-translate-y-0.5 */
   .btn-1 {
     @apply rounded-full bg-primary text-foreground font-semibold hover:opacity-80;
   }

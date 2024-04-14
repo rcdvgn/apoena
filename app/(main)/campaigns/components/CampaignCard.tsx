@@ -16,7 +16,7 @@ import {
   SaveIcon,
   ShareIcon,
   MoreIcon,
-} from "../_icons/icons";
+} from "../../../_components/icons";
 
 interface Campaign {
   pictureUrl: string;
@@ -77,7 +77,10 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
   };
 
   return (
-    <div ref={fundsBar} className="container h-auto w-full">
+    <div
+      ref={fundsBar}
+      className="container h-auto w-full hover:shadow-md transition-all ease-in-out"
+    >
       <div className="flex items-center h-[65px] px-4 py-3 ">
         <div
           style={{ backgroundImage: `url(${campaign.pictureUrl})` }}
@@ -87,7 +90,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
             <FullScreenIcon className="fill-foreground h-5" />
           </div>
         </div>
-        <div className="font-semibold text-[15px] text-text min-w-0 line-clamp-2 mr-5">
+        <div className="font-semibold text-sm text-text min-w-0 line-clamp-2 mr-5">
           {campaign.title}
         </div>
         <button className="bg-primary px-[15px] py-2.5 rounded-full font-bold text-sm text-foreground ml-auto">
@@ -102,7 +105,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           className="h-full bg-primary rounded-full"
         ></div>
       </div>
-      <div className="relative h-[4rem] overflow-hidden mx-4">
+      <div className="relative h-[4rem] overflow-hidden mx-4 cursor-pointer">
         <div className="absolute left-0 top-0 bottom-0 h-full min-w-full flex gap-3 justify-between items-center">
           <CampaignLabel
             icon={
@@ -132,7 +135,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           />
         </div>
       </div>
-      <div className="flex px-4 p-2 gap-4">
+      <div className="flex px-4 p-2 gap-4 cursor-pointer">
         <div className="text-[13px] leading-6">
           <span className="line-clamp-3 font-semibold text-text">
             {limitDescription(campaign.description) + " "}
