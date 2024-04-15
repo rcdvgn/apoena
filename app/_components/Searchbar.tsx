@@ -25,7 +25,7 @@ export default function Searchbar() {
         onChange={(e) => setSearchQuery(e.target.value)}
         type="text"
         spellCheck="false"
-        className="border-none outline-none bg-transparent h-full grow text-text/75 text-[13px] font-semibold focus:text-text"
+        className="border-none outline-none bg-transparent h-full grow text-text/75 text-xs font-semibold focus:text-text"
       />
       {searchQuery ? (
         <span

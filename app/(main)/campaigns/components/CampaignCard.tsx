@@ -1,7 +1,5 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-
 import {
   TagIcon,
   PinIcon,
@@ -36,30 +34,18 @@ interface Campaign {
   raised: number;
 }
 
-export default function CampaignCard({ campaign }: { campaign: Campaign }) {
-  const [fundsBarWidth, setFundsBarWidth] = useState(0);
+interface CampaignCardProps {
+  campaign: Campaign;
+  setSelectedCampaign: React.Dispatch<React.SetStateAction<Campaign | null>>;
+}
 
-  const fundsBar = useRef<HTMLDivElement>(null);
-
+export default function CampaignCard({
+  campaign,
+  setSelectedCampaign,
+}: CampaignCardProps) {
   const limitDescription = (description: string) => {
     return description.substring(0, 150) + "...";
   };
-
-  useEffect(() => {
-    const updateFundsBarWidth = () => {
-      if (fundsBar.current) {
-        setFundsBarWidth(fundsBar.current.offsetWidth);
-      }
-    };
-
-    updateFundsBarWidth();
-
-    window.addEventListener("resize", updateFundsBarWidth);
-
-    return () => {
-      window.removeEventListener("resize", updateFundsBarWidth);
-    };
-  }, []);
 
   const CampaignLabel = ({
     icon,
@@ -71,16 +57,13 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
     return (
       <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 flex-shrink-0">
         {icon}
-        <span className="text-primary font-bold text-xs">{text}</span>
+        <span className="text-primary font-semibold text-xs">{text}</span>
       </div>
     );
   };
 
   return (
-    <div
-      ref={fundsBar}
-      className="container h-auto w-full hover:shadow-md hover:bg-foreground/50 transition-all ease-in-out"
-    >
+    <div className="container shadow-sm h-auto w-full hover:shadow-md hover:bg-foreground/50 transition-all ease-in-out">
       <div className="flex items-center h-[65px] px-4 py-3 ">
         <div
           style={{ backgroundImage: `url(${campaign.pictureUrl})` }}
@@ -93,19 +76,17 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
         <div className="font-semibold text-sm text-text min-w-0 line-clamp-2 mr-5">
           {campaign.title}
         </div>
-        <button className="bg-primary px-[15px] py-2.5 rounded-full font-bold text-sm text-foreground ml-auto">
-          Contribuir
-        </button>
+        <button className="btn-2 ml-auto">Contribuir</button>
       </div>
       <div className="h-[2px] bg-primary/30 rounded-full">
         <div
           style={{
-            width: `${(campaign.raised * fundsBarWidth) / campaign.goal}px`,
+            width: `${(campaign.raised * 100) / campaign.goal}%`,
           }}
           className="h-full bg-primary rounded-full"
         ></div>
       </div>
-      <div className="relative h-[4rem] overflow-hidden mx-4 cursor-pointer">
+      <div className="relative h-14 overflow-hidden mx-4 cursor-pointer">
         <div className="absolute left-0 top-0 bottom-0 h-full min-w-full flex gap-3 justify-between items-center">
           <CampaignLabel
             icon={
@@ -136,10 +117,10 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
         </div>
       </div>
       <div className="flex px-4 p-2 gap-4 cursor-pointer">
-        <div className="text-[13px] leading-6">
-          <span className="line-clamp-3 font-semibold text-text">
+        <div className="leading-6">
+          <span className="line-clamp-3 font-semibold text-text text-[13px]">
             {limitDescription(campaign.description) + " "}
-            <span className="hover:underline text-primary font-bold cursor-pointer">
+            <span className="hover:underline text-primary font-bold cursor-pointer text-xs">
               Ler mais
             </span>
           </span>
@@ -158,7 +139,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
               return (
                 <div
                   key={index}
-                  className="grid place-items-center rounded-md h-12 w-12 bg-secondary bg-center flex-shrink-0 border-2 border-foreground font-semibold text-substext text-md"
+                  className="grid place-items-center rounded-md h-12 w-12 bg-secondary bg-center flex-shrink-0 border-2 border-foreground font-semibold text-substext text-base"
                 >
                   +{campaign.additionalPhotos.length - 2}
                 </div>

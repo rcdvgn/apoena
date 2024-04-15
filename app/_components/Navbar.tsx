@@ -5,24 +5,24 @@ import Searchbar from "./Searchbar";
 
 export default function Navbar() {
   return (
-    <div className="z-10 sticky top-0 flex gap-16 justify-between items-center px-8 h-16 w-full bg-gradient-to-r from-primary-light via-primary to-primary-dark">
+    <div className="flex gap-16 justify-between items-center px-8 h-16 w-full bg-gradient-to-r from-primary-light via-primary to-primary-dark">
       <span className="text-foreground font-black text-xl mt-[-7px]">
         Apoena
       </span>
       <Link
-        className="text-foreground font-bold text-sm hover:opacity-80"
+        className="text-foreground font-bold text-[13px] hover:opacity-80"
         href="/campaigns"
       >
         Campanhas
       </Link>
       <Link
-        className="text-foreground font-bold text-sm hover:opacity-80"
+        className="text-foreground font-bold text-[13px] hover:opacity-80"
         href="/campaigns"
       >
         Programa Combu
       </Link>
       <Link
-        className="text-foreground font-bold text-sm hover:opacity-80"
+        className="text-foreground font-bold text-[13px] hover:opacity-80"
         href="/campaigns"
       >
         Sobre
