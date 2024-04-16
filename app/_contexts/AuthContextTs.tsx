@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    console.log("entered useEffect");
+    console.log(user);
     const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
       console.log("entered unsubscribe");
       if (currUser) {

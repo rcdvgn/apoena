@@ -9,6 +9,7 @@ export default function IsNotAuth({ children }: any) {
   const { user } = useAuth();
 
   useEffect(() => {
+    console.log(user);
     if (user) {
       if (user.name) {
         router.push("/campaigns");

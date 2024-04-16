@@ -9,6 +9,7 @@ export default function IsAuth({ children }: any) {
   const { user } = useAuth();
 
   useEffect(() => {
+    console.log(user);
     if (!user) {
       router.push("/sign-in");
     } else if (!user.name) {

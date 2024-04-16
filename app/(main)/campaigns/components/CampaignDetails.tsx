@@ -43,20 +43,20 @@ export default function CampaignDetails({ campaign }: any) {
         <div className="flex border-b-2 border-background h-20">
           <span
             onClick={() => handleTabChange("details")}
-            className={`grow grid place-items-center border-b-2 border-transparent hover:border-primary mb-[-2px] cursor-pointer text-sm font-bold ${
+            className={`grow grid place-items-center border-b-2 hover:border-primary mb-[-2px] cursor-pointer text-sm font-bold ${
               selectedTab.details
-                ? "border-primary mb-[-2px] text-primary"
-                : "text-subtext"
+                ? "border-primary text-primary"
+                : "text-subtext border-transparent"
             }`}
           >
             Detalhes
           </span>
           <span
             onClick={() => handleTabChange("comments")}
-            className={`grow grid place-items-center border-b-2 border-transparent hover:border-primary mb-[-2px] cursor-pointer text-sm font-bold ${
+            className={`grow grid place-items-center border-b-2 hover:border-primary mb-[-2px] cursor-pointer text-sm font-bold ${
               selectedTab.comments
-                ? "border-primary mb-[-2px] text-primary"
-                : "text-subtext"
+                ? "border-primary text-primary"
+                : "text-subtext border-transparent"
             }`}
           >
             Comentarios
