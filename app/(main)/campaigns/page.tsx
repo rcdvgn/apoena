@@ -12,10 +12,10 @@ export default function Campaigns() {
   const [selectedCampaign, setSelectedCampaign] = useState<any>(campaigns[0]);
 
   return (
-    <div className="px-global-spacing w-full max-w-[78rem]">
+    <div className="px-8 w-full max-w-[78rem]">
       <Filters />
-      <div className="flex gap-global-spacing pb-4">
-        <div className="flex flex-col min-w-[30rem] w-[30rem] gap-global-spacing pt-4">
+      <div className="flex gap-4 pb-4">
+        <div className="flex flex-col min-w-[30rem] w-[30rem] gap-4 pt-4">
           {campaigns.map((item, index) => {
             return (
               <CampaignCard

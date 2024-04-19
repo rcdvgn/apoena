@@ -13,7 +13,7 @@ export default function Navbar() {
     signOff();
   };
   return (
-    <div className="flex gap-16 justify-between items-center px-8 h-16 w-full bg-gradient-to-r from-primary-light via-primary to-primary-dark">
+    <div className="flex shadow-sm gap-16 justify-between items-center px-8 h-16 w-full bg-gradient-to-r from-primary-light via-primary to-primary-dark">
       <span className="text-foreground font-black text-xl mt-[-7px]">
         Apoena
       </span>

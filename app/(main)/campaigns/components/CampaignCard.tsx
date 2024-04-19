@@ -14,6 +14,7 @@ import {
   SaveIcon,
   ShareIcon,
   MoreIcon,
+  ArrowIcon,
 } from "../../../_components/icons";
 
 interface Campaign {
@@ -55,7 +56,7 @@ export default function CampaignCard({
     text: any;
   }) => {
     return (
-      <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 flex-shrink-0">
+      <div className="flex items-center gap-2 rounded-full hover:bg-primary/20 bg-primary/10 px-4 py-1.5 flex-shrink-0 cursor-pointer">
         {icon}
         <span className="text-primary font-semibold text-xs">{text}</span>
       </div>
@@ -64,19 +65,25 @@ export default function CampaignCard({
 
   return (
     <div className="container shadow-sm h-auto w-full hover:shadow-md hover:bg-foreground/50 transition-all ease-in-out">
-      <div className="flex items-center h-[65px] px-4 py-3 ">
-        <div
-          style={{ backgroundImage: `url(${campaign.pictureUrl})` }}
-          className="group relative mr-4 rounded-lg h-full aspect-square bg-cover bg-center flex-shrink-0 overflow-hidden cursor-pointer"
-        >
-          <div className="bg-black/30 h-full w-full top-0 left-0 absolute grid place-items-center invisible group-hover:visible">
-            <FullScreenIcon className="fill-foreground h-5" />
+      <div className="group flex items-center justify-between h-[65px] px-4 py-3 cursor-pointer">
+        <div className="flex gap-4 items-center justify-start h-full w-full">
+          <div
+            style={{ backgroundImage: `url(${campaign.pictureUrl})` }}
+            className="relative rounded-lg h-full aspect-square bg-cover bg-center flex-shrink-0 overflow-hidden cursor-pointer"
+          >
+            <div className="bg-black/30 h-full w-full top-0 left-0 absolute grid place-items-center invisible group-hover:visible">
+              <FullScreenIcon className="fill-foreground h-4" />
+            </div>
+          </div>
+          <div className="font-semibold text-sm text-text min-w-0 line-clamp-2 group-hover:underline">
+            {campaign.title}
           </div>
         </div>
-        <div className="font-semibold text-sm text-text min-w-0 line-clamp-2 mr-5">
-          {campaign.title}
+        <div className="grid place-items-center aspect-square h-full rounded-full hover:bg-black/5 cursor-pointer">
+          <MoreIcon className="fill-text w-4" />
         </div>
-        <button className="btn-2 ml-auto">Contribuir</button>
+
+        {/* <button className="btn-2 ml-auto">Contribuir</button> */}
       </div>
       <div className="h-[2px] bg-primary/30 rounded-full">
         <div
@@ -86,7 +93,7 @@ export default function CampaignCard({
           className="h-full bg-primary rounded-full"
         ></div>
       </div>
-      <div className="relative h-14 overflow-hidden mx-4 cursor-pointer">
+      <div className="relative h-14 overflow-hidden mx-4">
         <div className="absolute left-0 top-0 bottom-0 h-full min-w-full flex gap-3 justify-between items-center">
           <CampaignLabel
             icon={
@@ -116,16 +123,16 @@ export default function CampaignCard({
           />
         </div>
       </div>
-      <div className="flex px-4 p-2 gap-4 cursor-pointer">
-        <div className="leading-6">
-          <span className="line-clamp-3 font-semibold text-text text-[13px]">
+      <div className="flex px-4 pb-2 gap-4">
+        <div className="text-[13px]">
+          <span className="line-clamp-3 font-medium text-text leading-6">
             {limitDescription(campaign.description) + " "}
-            <span className="hover:underline text-primary font-bold cursor-pointer text-xs">
-              Ler mais
+            <span className="hover:underline text-primary font-bold cursor-pointer">
+              Ver mais
             </span>
           </span>
         </div>
-        <div className="flex">
+        {/* <div className="flex">
           {campaign.additionalPhotos.map((photo, index) => {
             if (index < 2) {
               return (
@@ -146,7 +153,7 @@ export default function CampaignCard({
               );
             }
           })}
-        </div>
+        </div> */}
       </div>
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center">
@@ -172,7 +179,7 @@ export default function CampaignCard({
           ""
         )}
       </div>
-      <div className="flex justify-between border-t-2 border-background px-4 py-2">
+      <div className="flex justify-between border-t-2 border-background px-8 py-2">
         <div className="flex flex-row-reverse items-center gap-1">
           <span className="text-xs font-bold text-like">24</span>
           <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
@@ -202,10 +209,10 @@ export default function CampaignCard({
           </div>
         </div>
 
-        <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
+        {/* <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
           <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-subtext/10 group-hover:h-full"></div>
           <MoreIcon className="fill-subtext w-4" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
