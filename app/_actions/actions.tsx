@@ -15,9 +15,11 @@ export async function createUser(userData: any) {
   try {
     const newUser = {
       uid: userData.uid,
-      name: userData.name,
+      name: userData.displayName,
       email: userData.email,
-      isVerified: false,
+      description: "",
+      website: "",
+      accountType: "individual",
       createdIn: Timestamp.now(),
     };
 

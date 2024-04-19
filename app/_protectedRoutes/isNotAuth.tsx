@@ -11,7 +11,7 @@ export default function IsNotAuth({ children }: any) {
   useEffect(() => {
     console.log(user);
     if (user) {
-      if (user.name) {
+      if (user.displayName) {
         router.push("/campaigns");
       } else {
         router.push("/onboarding");

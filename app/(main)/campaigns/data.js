@@ -41,7 +41,7 @@ export const campaigns = [
     description:
       "O projeto visa fornecer acesso à água potável em comunidades rurais do semiárido brasileiro. Utilizaremos tecnologias de captação de água da chuva e sistemas de filtragem para garantir água limpa e segura para consumo humano e agrícola.",
     createdIn: "2022-09-20",
-    owner: "Associação Água Limpa",
+    owner: "Thiago Almeida",
     isAd: true,
     isLiked: true,
     isOwnerVerified: true,

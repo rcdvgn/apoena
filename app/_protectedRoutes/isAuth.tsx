@@ -12,10 +12,10 @@ export default function IsAuth({ children }: any) {
     console.log(user);
     if (!user) {
       router.push("/sign-in");
-    } else if (!user.name) {
+    } else if (!user.displayName) {
       router.push("/onboarding");
     }
   }, [user, router]);
 
-  return user?.name ? children : null;
+  return user?.displayName ? children : null;
 }

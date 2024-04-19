@@ -11,7 +11,7 @@ export default function IsNotUser({ children }: any) {
   useEffect(() => {
     console.log(user);
     if (user) {
-      if (user.name) {
+      if (user.displayName) {
         router.push("/campaigns");
       }
     } else {
@@ -20,5 +20,5 @@ export default function IsNotUser({ children }: any) {
   }, [user, router]);
 
   // Adjusted return statement: Render children only if the user is authenticated but does not have a name.
-  return user && !user.name ? children : null;
+  return user && !user.displayName ? children : null;
 }
