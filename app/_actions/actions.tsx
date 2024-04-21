@@ -3,7 +3,7 @@
 import {
   collection,
   setDoc,
-  getDoc,
+  getDocs,
   doc,
   Timestamp,
   onSnapshot,
@@ -14,7 +14,8 @@ import { db } from "../_config/firebase";
 export async function createUser(userData: any) {
   try {
     const newUser = {
-      name: userData.displayName,
+      uid: userData.uid,
+      displayName: userData.name,
       email: userData.email,
       description: "",
       website: "",
@@ -28,5 +29,18 @@ export async function createUser(userData: any) {
     return newUser;
   } catch (e) {
     console.error("Error adding document: ", e);
+  }
+}
+
+export async function getCampaigns() {
+  try {
+    const querySnapshot = await getDocs(collection(db, "campaigns"));
+    const campaignsData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data(),
+    }));
+    return campaignsData;
+  } catch (error) {
+    console.error("Error fetching campaigns:", error);
   }
 }

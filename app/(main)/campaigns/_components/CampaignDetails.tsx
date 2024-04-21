@@ -125,20 +125,20 @@ export default function CampaignDetails({ campaign }: any) {
         <div className="flex border-b-2 border-background min-h-20 h-20">
           <span
             onClick={() => setSelectedTab(0)}
-            className={`grow grid place-items-center border-b-2 hover:border-primary mb-[-2px] cursor-pointer text-sm font-bold ${
+            className={`grow grid place-items-center border-b-2 hover:border-primary mb-[-2px] cursor-pointer text-[13px] font-bold hover:text-primary ${
               selectedTab === 0
                 ? "border-primary text-primary"
-                : "text-subtext border-transparent"
+                : "text-text/50 border-transparent"
             }`}
           >
             Detalhes
           </span>
           <span
             onClick={() => setSelectedTab(1)}
-            className={`grow grid place-items-center border-b-2 hover:border-primary mb-[-2px] cursor-pointer text-sm font-bold ${
+            className={`grow grid place-items-center border-b-2 hover:border-primary mb-[-2px] cursor-pointer text-[13px] font-bold hover:text-primary ${
               selectedTab === 1
                 ? "border-primary text-primary"
-                : "text-subtext border-transparent"
+                : "text-text/50 border-transparent"
             }`}
           >
             Comentarios

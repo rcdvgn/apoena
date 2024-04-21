@@ -64,7 +64,10 @@ export default function CampaignCard({
   };
 
   return (
-    <div className="container shadow-sm h-auto w-full hover:shadow-md hover:bg-foreground/50 transition-all ease-in-out">
+    <div
+      onClick={() => setSelectedCampaign(campaign)}
+      className="container shadow-sm h-auto w-full hover:shadow-md hover:bg-foreground/50 transition-all ease-in-out"
+    >
       <div className="group flex items-center justify-between h-[65px] px-4 py-3 cursor-pointer">
         <div className="flex gap-4 items-center justify-start h-full w-full">
           <div
