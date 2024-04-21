@@ -79,7 +79,7 @@ export default function CampaignCard({
             {campaign.title}
           </div>
         </div>
-        <div className="grid place-items-center aspect-square h-full rounded-full hover:bg-black/5 cursor-pointer">
+        <div className="grid place-items-center aspect-square h-full rounded-full hover:hvr-1 cursor-pointer">
           <MoreIcon className="fill-text w-4" />
         </div>
 

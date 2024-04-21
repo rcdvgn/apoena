@@ -260,3 +260,111 @@ export const campaigns = [
     raised: 110000,
   },
 ];
+
+export const comments = [
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/02/32/17/023217d137d3e3f4bef77597f3153ead.jpg",
+    likes: 15,
+    username: "Lucca Nobrazzo",
+    body: "Estou ansioso para ver os resultados desse projeto. Vamos apoiar!",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/e1/ca/dc/e1cadcf346c789648e34026d8d72bb76.jpg",
+    likes: 10,
+    username: "Ze Pequeno",
+    body: "É incrível ver como a comunidade está se unindo para resolver esse problema ambiental.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/de/42/4b/de424b31f39443594c9512e0d79813c8.jpg",
+    likes: 25,
+    username: "Cepe F.",
+    body: "Essa campanha é fundamental para garantir um futuro sustentável para a ilha do Combu.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/44/00/2e/44002e7962cb81070300ade01645e87b.jpg",
+    likes: 18,
+    username: "Michellin Mann",
+    body: "Água limpa é um direito de todos. Vamos ajudar a tornar isso realidade!",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/736x/4d/9b/4b/4d9b4b2c61ec2d0e071d74c6b1f84a8a.jpg",
+    likes: 20,
+    username: "Valentina Luzano",
+    body: "Excelente iniciativa! Água potável é essencial para a saúde da ilha do Combu.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/75/9a/62/759a62770c4e698348d59b55e3782383.jpg",
+    likes: 12,
+    username: "Luiz Henrique",
+    body: "Estou orgulhoso de fazer parte dessa comunidade que se importa com o meio ambiente.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/1f/61/18/1f611817cc4a03f0846b7cccacbce3c4.jpg",
+    likes: 30,
+    username: "Manuelly Petroleo",
+    body: "Juntos, podemos fazer a diferença e garantir água potável para todos os habitantes do Combu.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/9e/f9/e8/9ef9e8b68ac9469f495e6826398ab1fa.jpg",
+    likes: 22,
+    username: "Hiro Xima",
+    body: "Essa é uma causa que merece todo o nosso apoio. Vamos colaborar!",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/0d/5f/54/0d5f54d3e02f541eec0c4677adbe1283.jpg",
+    likes: 17,
+    username: "Naga Zachi",
+    body: "Parabéns aos envolvidos nesse projeto tão importante para a saúde da ilha.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/5d/ba/45/5dba455536627f90d69ddf6d2372913b.jpg",
+    likes: 28,
+    username: "Joao da Enxada",
+    body: "A água é vida. Vamos protegê-la e garantir seu acesso a todos.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/9c/8f/dc/9c8fdc9d796f3fa6d06587d7e39cb44a.jpg",
+    likes: 19,
+    username: "Jose Felicio",
+    body: "Estou feliz em ver a mobilização para resolver esse problema tão urgente.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/c3/0b/58/c30b582f771d2854cfec9ce33e5155c7.jpg",
+    likes: 14,
+    username: "Roberta Mata",
+    body: "Todos devemos fazer a nossa parte para preservar esse recurso tão precioso.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/a7/bf/92/a7bf926db6113386d08f738a08998b48.jpg",
+    likes: 21,
+    username: "Lais Silva",
+    body: "Vamos trabalhar juntos para garantir água limpa e segura para todos.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/3e/3a/e7/3e3ae76437a12971beb686ebf9e08db5.jpg",
+    likes: 26,
+    username: "Hepa Tite",
+    body: "Essa campanha é uma inspiração para outras comunidades ao redor do mundo.",
+  },
+  {
+    userPictureUrl:
+      "https://i.pinimg.com/236x/2a/31/de/2a31de108bf780d3219add7b45687804.jpg",
+    likes: 16,
+    username: "Patricia Albuquerque",
+    body: "O futuro da ilha do Combu depende do sucesso dessa campanha. Vamos apoiar!",
+  },
+];

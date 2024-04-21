@@ -14,7 +14,6 @@ import { db } from "../_config/firebase";
 export async function createUser(userData: any) {
   try {
     const newUser = {
-      uid: userData.uid,
       name: userData.displayName,
       email: userData.email,
       description: "",

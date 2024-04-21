@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 
-import Filters from "./components/Filters";
-import CampaignCard from "./components/CampaignCard";
-import CampaignDetails from "./components/CampaignDetails";
+import Filters from "./_components/Filters";
+import CampaignCard from "./_components/CampaignCard";
+import CampaignDetails from "./_components/CampaignDetails";
 
 import { campaigns } from "./data";
 
