@@ -16,20 +16,27 @@ export default function Campaigns() {
 
   useEffect(() => {
     const fetchCampaigns = async () => {
-      try {
-        const campaignsData = await getCampaigns();
-        setCampaigns(campaignsData);
-        console.log(campaignsData);
-      } catch (error) {
-        console.error("Error fetching campaigns:", error);
-      }
+      const campaignsData = await getCampaigns();
+      setCampaigns(campaignsData);
+      console.log(campaignsData);
+      // if (campaignsData) {
+      //   const updatedCampaignsData = await Promise.all(
+      //     campaignsData.map(async (campaign) => {
+      //       const comments = await getComments(campaign.id);
+      //       return {
+      //         ...campaign,
+      //         data: { ...campaign.data, comments: comments },
+      //       };
+      //     })
+      //   );
+      // }
     };
 
     fetchCampaigns();
   }, []);
 
   useEffect(() => {
-    campaigns ? setSelectedCampaign(campaigns[0].data) : "";
+    campaigns && !selectedCampaign ? setSelectedCampaign(campaigns[0]) : "";
   }, [campaigns]);
 
   return (
@@ -52,7 +59,12 @@ export default function Campaigns() {
         <div className="flex-shrink-1 grow h-auto">
           <div className="flex flex-col gap-4 pt-4 h-[calc(100vh-1rem)] sticky top-0">
             {selectedCampaign && (
-              <CampaignDetails campaign={selectedCampaign} />
+              <CampaignDetails
+                campaign={selectedCampaign}
+                setSelectedCampaign={setSelectedCampaign}
+                campaigns={campaigns}
+                setCampaigns={setCampaigns}
+              />
             )}
           </div>
         </div>

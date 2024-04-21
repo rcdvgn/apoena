@@ -5,7 +5,10 @@ import {
   setDoc,
   getDocs,
   doc,
+  query,
+  where,
   Timestamp,
+  addDoc,
   onSnapshot,
 } from "firebase/firestore";
 
@@ -42,5 +45,41 @@ export async function getCampaigns() {
     return campaignsData;
   } catch (error) {
     console.error("Error fetching campaigns:", error);
+  }
+}
+
+export async function getComments(campaignId: any) {
+  try {
+    const q = query(
+      collection(db, "comments"),
+      where("campaignId", "==", campaignId)
+    );
+    const querySnapshot = await getDocs(q);
+    const comments = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data(),
+    }));
+    return comments;
+  } catch (error: any) {
+    throw new Error("Error fetching comments:", error);
+  }
+}
+
+export async function createComment(body: any, userId: any, campaignId: any) {
+  try {
+    const docRef = await addDoc(collection(db, "comments"), {
+      body: body,
+      userId: userId,
+      campaignId: campaignId,
+      likes: [],
+      createdIn: Timestamp.now(),
+    });
+
+    console.log(docRef);
+
+    const updatedComments = await getComments(campaignId);
+    return updatedComments;
+  } catch (error: any) {
+    throw new Error("Error creating comment:", error);
   }
 }
