@@ -3,6 +3,7 @@
 import {
   collection,
   setDoc,
+  getDoc,
   getDocs,
   doc,
   query,
@@ -40,13 +41,22 @@ export async function getCampaigns() {
     const querySnapshot = await getDocs(collection(db, "campaigns"));
     const campaignsData = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-      data: doc.data(),
+      ...doc.data(),
     }));
     return campaignsData;
   } catch (error) {
     console.error("Error fetching campaigns:", error);
   }
 }
+
+const getCommentUserData = async (userId: any) => {
+  try {
+    const userDoc = await getDoc(doc(db, "users", userId));
+    return userDoc;
+  } catch (error: any) {
+    throw new Error("Error fetching comment creator: ", error);
+  }
+};
 
 export async function getComments(campaignId: any) {
   try {
@@ -55,10 +65,23 @@ export async function getComments(campaignId: any) {
       where("campaignId", "==", campaignId)
     );
     const querySnapshot = await getDocs(q);
-    const comments = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      data: doc.data(),
-    }));
+
+    const comments = await Promise.all(
+      querySnapshot.docs.map(async (comment) => {
+        const userDoc = await getCommentUserData(comment.data().userId);
+        if (!userDoc.exists()) {
+          throw new Error("Error fetching comment creator");
+        }
+        return {
+          id: comment.id,
+          ...comment.data(),
+          userId: userDoc.id,
+          userName: userDoc.data().displayName,
+          userPictureUrl: userDoc.data().pictureUrl,
+        };
+      })
+    );
+    console.log(comments);
     return comments;
   } catch (error: any) {
     throw new Error("Error fetching comments:", error);
@@ -74,9 +97,6 @@ export async function createComment(body: any, userId: any, campaignId: any) {
       likes: [],
       createdIn: Timestamp.now(),
     });
-
-    console.log(docRef);
-
     const updatedComments = await getComments(campaignId);
     return updatedComments;
   } catch (error: any) {

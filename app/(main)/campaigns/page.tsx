@@ -18,18 +18,8 @@ export default function Campaigns() {
     const fetchCampaigns = async () => {
       const campaignsData = await getCampaigns();
       setCampaigns(campaignsData);
-      console.log(campaignsData);
-      // if (campaignsData) {
-      //   const updatedCampaignsData = await Promise.all(
-      //     campaignsData.map(async (campaign) => {
-      //       const comments = await getComments(campaign.id);
-      //       return {
-      //         ...campaign,
-      //         data: { ...campaign.data, comments: comments },
-      //       };
-      //     })
-      //   );
-      // }
+
+      // TODO: prevent unecessary data fetches from useEffects
     };
 
     fetchCampaigns();
@@ -49,7 +39,7 @@ export default function Campaigns() {
                 return (
                   <CampaignCard
                     key={index}
-                    campaign={item.data}
+                    campaign={item}
                     setSelectedCampaign={setSelectedCampaign}
                   />
                 );

@@ -12,24 +12,23 @@ import { useAuth } from "../../../_contexts/AuthContext";
 
 import { HeartIcon } from "@/app/_components/icons";
 
-interface CampaignDetailsProps {
-  campaign: any;
-  setSelectedCampaign: any;
-  campaigns: any;
-  setCampaigns: any;
-}
-
-const CampaignDetails: React.FC<CampaignDetailsProps> = ({
+const CampaignDetails = ({
   campaign,
   setSelectedCampaign,
   campaigns,
   setCampaigns,
+}: {
+  campaign: any;
+  setSelectedCampaign: any;
+  campaigns: any;
+  setCampaigns: any;
 }) => {
   const { user } = useAuth();
 
   const CommentsTab = () => {
     const newCommentInput = useRef<any>(null);
     const [newComment, setNewComment] = useState("");
+    const [comments, setComments] = useState<any>([]);
 
     useAutosizeTextArea(newCommentInput.current, newComment);
 
@@ -44,7 +43,7 @@ const CampaignDetails: React.FC<CampaignDetailsProps> = ({
         const updatedComments = await createComment(
           newComment,
           user.uid,
-          campaign.id
+          campaign.uid
         );
         const updatedCampaign = {
           ...campaign,
@@ -52,7 +51,7 @@ const CampaignDetails: React.FC<CampaignDetailsProps> = ({
         };
 
         const updatedCampaigns = campaigns.map((item: any) => {
-          if (item.id === campaign.id) {
+          if (item.uid === campaign.uid) {
             return updatedCampaign;
           } else {
             return item;
@@ -64,13 +63,20 @@ const CampaignDetails: React.FC<CampaignDetailsProps> = ({
       }
     };
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+      const fetchComments = async () => {
+        const commentsData = await getComments(campaign.uid);
+        setComments(commentsData);
+      };
+
+      fetchComments();
+    }, []);
 
     return (
       <>
         <div className="flex flex-col gap-4 pt-4 px-4 grow">
-          {campaign.data
-            ? campaign.data.comments.data?.map((comment: any, index: any) => {
+          {comments.length
+            ? comments.map((comment: any, index: any) => {
                 return (
                   <div className="flex gap-2" key={index}>
                     <div className="">
@@ -83,13 +89,13 @@ const CampaignDetails: React.FC<CampaignDetailsProps> = ({
                     </div>
                     <div
                       className={`w-full ${
-                        index !== campaign.comments.length - 1
+                        index !== comments.length - 1
                           ? "border-b-[1px] border-secondary"
                           : ""
                       } pb-2`}
                     >
                       <div className="text-[13px] font-bold text-text">
-                        {comment.username}
+                        {comment.userName}
                       </div>
                       <div className="flex justify-between">
                         <span className="text-[13px] font-medium text-text">
@@ -159,11 +165,11 @@ const CampaignDetails: React.FC<CampaignDetailsProps> = ({
           </div>
           <div className="flex">
             <div
-              style={{ backgroundImage: `url(${campaign.data.pictureUrl})` }}
+              style={{ backgroundImage: `url(${campaign.pictureUrl})` }}
               className="relative mr-4 rounded-lg h-16 aspect-square bg-cover bg-center flex-shrink-0"
             ></div>
             <div className="font-extrabold text-xl text-text">
-              {campaign.data.title}
+              {campaign.title}
             </div>
           </div>
         </div>
