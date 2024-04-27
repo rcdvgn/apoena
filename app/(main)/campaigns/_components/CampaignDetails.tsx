@@ -12,7 +12,7 @@ import { useAuth } from "../../../_contexts/AuthContext";
 
 import { HeartIcon } from "@/app/_components/icons";
 
-const CampaignDetails = ({
+const CommentsTab = ({
   campaign,
   setSelectedCampaign,
   campaigns,
@@ -25,135 +25,144 @@ const CampaignDetails = ({
 }) => {
   const { user } = useAuth();
 
-  const CommentsTab = () => {
-    const newCommentInput = useRef<any>(null);
-    const [newComment, setNewComment] = useState("");
-    const [comments, setComments] = useState<any>([]);
+  const newCommentInput = useRef<any>(null);
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState<any>([]);
 
-    useAutosizeTextArea(newCommentInput.current, newComment);
+  useAutosizeTextArea(newCommentInput.current, newComment);
 
-    const handleNewCommentChange = (e: any) => {
-      setNewComment(e.target?.value);
-    };
+  const handleNewCommentChange = (e: any) => {
+    setNewComment(e.target?.value);
+  };
 
-    const handleNewComment = async (e: any) => {
-      e.preventDefault();
+  const handleNewComment = async (e: any) => {
+    e.preventDefault();
 
-      if (newComment.length) {
-        const updatedComments = await createComment(
-          newComment,
-          user.uid,
-          campaign.uid
-        );
-        const updatedCampaign = {
-          ...campaign,
-          data: { ...campaign.data, comments: updatedComments },
-        };
-
-        const updatedCampaigns = campaigns.map((item: any) => {
-          if (item.uid === campaign.uid) {
-            return updatedCampaign;
-          } else {
-            return item;
-          }
-        });
-
-        setSelectedCampaign(updatedCampaign);
-        setCampaigns(updatedCampaigns);
-      }
-    };
-
-    useEffect(() => {
-      const fetchComments = async () => {
-        const commentsData = await getComments(campaign.uid);
-        setComments(commentsData);
+    if (newComment.length) {
+      const updatedComments = await createComment(
+        newComment,
+        user.uid,
+        campaign.uid
+      );
+      const updatedCampaign = {
+        ...campaign,
+        data: { ...campaign.data, comments: updatedComments },
       };
 
-      fetchComments();
-    }, []);
+      const updatedCampaigns = campaigns.map((item: any) => {
+        if (item.uid === campaign.uid) {
+          return updatedCampaign;
+        } else {
+          return item;
+        }
+      });
 
-    return (
-      <>
-        <div className="flex flex-col gap-4 pt-4 px-4 grow">
-          {comments.length
-            ? comments.map((comment: any, index: any) => {
-                return (
-                  <div className="flex gap-2" key={index}>
-                    <div className="">
-                      <div
-                        style={{
-                          backgroundImage: `url(${comment.userPictureUrl})`,
-                        }}
-                        className="h-8 aspect-square bg-cover bg-center flex-shrink-0 rounded-full"
-                      ></div>
-                    </div>
+      setSelectedCampaign(updatedCampaign);
+      setCampaigns(updatedCampaigns);
+    }
+  };
+
+  useEffect(() => {
+    console.log("children");
+    const fetchComments = async () => {
+      const commentsData = await getComments(campaign.uid);
+      setComments(commentsData);
+    };
+    fetchComments();
+  }, []);
+
+  return (
+    <>
+      <div className="flex flex-col gap-4 pt-4 px-4 grow">
+        {comments.length
+          ? comments.map((comment: any, index: any) => {
+              return (
+                <div className="flex gap-2" key={index}>
+                  <div className="">
                     <div
-                      className={`w-full ${
-                        index !== comments.length - 1
-                          ? "border-b-[1px] border-secondary"
-                          : ""
-                      } pb-2`}
-                    >
-                      <div className="text-[13px] font-bold text-text">
-                        {comment.userName}
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-[13px] font-medium text-text">
-                          {comment.body}
-                        </span>
-                        <div className="group flex flex-col justify-center items-center gap-[2px] ml-2 cursor-pointer">
-                          <div className="z-0 relative">
-                            <div className="group-hover:visible invisible z-[-1] absolute hvr-1 rounded-full h-10 w-10 left-[50%] -translate-x-[50%] top-[50%] -translate-y-[50%]"></div>
-                            <HeartIcon className="fill-like h-3" />
-                          </div>
-
-                          <span className="text-like font-medium text-[11px]">
-                            {comment.likes}
-                          </span>
+                      style={{
+                        backgroundImage: `url(${comment.userPictureUrl})`,
+                      }}
+                      className="h-8 aspect-square bg-cover bg-center flex-shrink-0 rounded-full"
+                    ></div>
+                  </div>
+                  <div
+                    className={`w-full ${
+                      index !== comments.length - 1
+                        ? "border-b-[1px] border-secondary"
+                        : ""
+                    } pb-2`}
+                  >
+                    <div className="text-[13px] font-bold text-text">
+                      {comment.userName}
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[13px] font-medium text-text">
+                        {comment.body}
+                      </span>
+                      <div className="group flex flex-col justify-center items-center gap-[2px] ml-2 cursor-pointer">
+                        <div className="z-0 relative">
+                          <div className="group-hover:visible invisible z-[-1] absolute hvr-1 rounded-full h-10 w-10 left-[50%] -translate-x-[50%] top-[50%] -translate-y-[50%]"></div>
+                          <HeartIcon className="fill-like h-3" />
                         </div>
+
+                        <span className="text-like font-medium text-[11px]">
+                          {comment.likes}
+                        </span>
                       </div>
                     </div>
                   </div>
-                );
-              })
-            : ""}
-        </div>
-        <form
-          onSubmit={handleNewComment}
-          className="bottom-0 sticky border-t-[1px] border-secondary bg-foreground p-4 flex items-center gap-2"
+                </div>
+              );
+            })
+          : ""}
+      </div>
+      <form
+        onSubmit={handleNewComment}
+        className="bottom-0 sticky border-t-[1px] border-secondary bg-foreground p-4 flex items-center gap-2"
+      >
+        <div
+          style={{
+            backgroundImage: `url("https://cdn.pixabay.com/photo/2021/04/05/12/38/man-6153295_1280.jpg")`,
+          }}
+          className="mb-auto h-8 aspect-square bg-cover bg-center flex-shrink-0 rounded-full"
+        ></div>
+        <textarea
+          className="border-none resize-none overflow-y-scroll px-0 outline-none grow text-[13px] font-medium text-text"
+          spellCheck="false"
+          ref={newCommentInput}
+          onChange={handleNewCommentChange}
+          value={newComment}
+          rows={1}
+          placeholder="Entre na discussão"
+        ></textarea>
+        <button
+          type="submit"
+          className={`ml-2 font-bold text-[13px] bg-transparent outline-none ${
+            newCommentInput.current && newCommentInput.current.value.length > 0
+              ? "cursor-pointer text-primary hover:underline"
+              : "text-primary/70 cursor-not-allowed"
+          }`}
         >
-          <div
-            style={{
-              backgroundImage: `url("https://cdn.pixabay.com/photo/2021/04/05/12/38/man-6153295_1280.jpg")`,
-            }}
-            className="mb-auto h-8 aspect-square bg-cover bg-center flex-shrink-0 rounded-full"
-          ></div>
-          <textarea
-            className="border-none resize-none overflow-y-scroll px-0 outline-none grow text-[13px] font-medium text-text"
-            spellCheck="false"
-            ref={newCommentInput}
-            onChange={handleNewCommentChange}
-            value={newComment}
-            rows={1}
-            placeholder="Entre na discussão"
-          ></textarea>
-          <button
-            type="submit"
-            className={`ml-2 font-bold text-[13px] bg-transparent outline-none ${
-              newCommentInput.current &&
-              newCommentInput.current.value.length > 0
-                ? "cursor-pointer text-primary hover:underline"
-                : "text-primary/70 cursor-not-allowed"
-            }`}
-          >
-            Postar
-          </button>
-        </form>
-      </>
-    );
-  };
+          Postar
+        </button>
+      </form>
+    </>
+  );
+};
 
-  const tabs = ["", <CommentsTab />];
+const CampaignDetails = ({
+  campaign,
+  setSelectedCampaign,
+  campaigns,
+  setCampaigns,
+}: {
+  campaign: any;
+  setSelectedCampaign: any;
+  campaigns: any;
+  setCampaigns: any;
+}) => {
+  const tabs = ["Details", "Comments"];
   const [selectedTab, setSelectedTab] = useState(0);
 
   return (
@@ -204,7 +213,14 @@ const CampaignDetails = ({
           </span>
         </div>
         <div className="flex flex-col grow min-h-0 overflow-auto rounded-b-2xl">
-          {tabs[selectedTab]}
+          <div className={selectedTab === 0 ? "hidden" : ""}>
+            <CommentsTab
+              campaign={campaign}
+              setSelectedCampaign={setSelectedCampaign}
+              campaigns={campaigns}
+              setCampaigns={setCampaigns}
+            />
+          </div>
         </div>
       </div>
     </>

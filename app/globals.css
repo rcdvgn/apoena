@@ -56,6 +56,6 @@ textarea::-webkit-scrollbar {
   }
 
   .hvr-1 {
-    @apply bg-text/10;
+    @apply bg-text/5;
   }
 }

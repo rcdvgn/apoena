@@ -15,19 +15,20 @@ export default function Campaigns() {
   const [selectedCampaign, setSelectedCampaign] = useState<any>(null);
 
   useEffect(() => {
+    console.log("parent");
     const fetchCampaigns = async () => {
       const campaignsData = await getCampaigns();
       setCampaigns(campaignsData);
-
+      campaignsData !== undefined ? setSelectedCampaign(campaignsData[0]) : "";
       // TODO: prevent unecessary data fetches from useEffects
     };
 
     fetchCampaigns();
   }, []);
 
-  useEffect(() => {
-    campaigns && !selectedCampaign ? setSelectedCampaign(campaigns[0]) : "";
-  }, [campaigns]);
+  // useEffect(() => {
+  //   campaigns && !selectedCampaign ? setSelectedCampaign(campaigns[0]) : "";
+  // }, [campaigns]);
 
   return (
     <div className="px-8 w-full max-w-[78rem]">

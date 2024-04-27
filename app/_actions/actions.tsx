@@ -81,7 +81,7 @@ export async function getComments(campaignId: any) {
         };
       })
     );
-    console.log(comments);
+    // console.log(comments);
     return comments;
   } catch (error: any) {
     throw new Error("Error fetching comments:", error);
