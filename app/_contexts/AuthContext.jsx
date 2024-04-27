@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log("context: " + user);
+    // console.log("context: " + user);
     const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
       if (currUser) {
         const userRef = doc(db, "users", currUser.uid);

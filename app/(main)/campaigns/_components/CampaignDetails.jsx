@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, forwardRef } from "react";
 
 import useAutosizeTextArea from "../../../_utils/useAutosizeTextArea";
 
@@ -10,32 +10,27 @@ import { useAuth } from "../../../_contexts/AuthContext";
 
 // import { comments } from "../data";
 
-import { HeartIcon } from "@/app/_components/icons";
+import { HeartIcon } from "../../../_components/icons";
 
 const CommentsTab = ({
   campaign,
   setSelectedCampaign,
   campaigns,
   setCampaigns,
-}: {
-  campaign: any;
-  setSelectedCampaign: any;
-  campaigns: any;
-  setCampaigns: any;
 }) => {
   const { user } = useAuth();
 
-  const newCommentInput = useRef<any>(null);
+  const newCommentInput = useRef(null);
   const [newComment, setNewComment] = useState("");
-  const [comments, setComments] = useState<any>([]);
+  const [comments, setComments] = useState([]);
 
   useAutosizeTextArea(newCommentInput.current, newComment);
 
-  const handleNewCommentChange = (e: any) => {
+  const handleNewCommentChange = (e) => {
     setNewComment(e.target?.value);
   };
 
-  const handleNewComment = async (e: any) => {
+  const handleNewComment = async (e) => {
     e.preventDefault();
 
     if (newComment.length) {
@@ -49,7 +44,7 @@ const CommentsTab = ({
         data: { ...campaign.data, comments: updatedComments },
       };
 
-      const updatedCampaigns = campaigns.map((item: any) => {
+      const updatedCampaigns = campaigns.map((item) => {
         if (item.uid === campaign.uid) {
           return updatedCampaign;
         } else {
@@ -75,7 +70,7 @@ const CommentsTab = ({
     <>
       <div className="flex flex-col gap-4 pt-4 px-4 grow">
         {comments.length
-          ? comments.map((comment: any, index: any) => {
+          ? comments.map((comment, index) => {
               return (
                 <div className="flex gap-2" key={index}>
                   <div className="">
@@ -156,12 +151,8 @@ const CampaignDetails = ({
   setSelectedCampaign,
   campaigns,
   setCampaigns,
-}: {
-  campaign: any;
-  setSelectedCampaign: any;
-  campaigns: any;
-  setCampaigns: any;
 }) => {
+  // const newCommentInput = useRef(null);
   const tabs = ["Details", "Comments"];
   const [selectedTab, setSelectedTab] = useState(0);
 

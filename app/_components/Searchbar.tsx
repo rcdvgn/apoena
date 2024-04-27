@@ -20,12 +20,12 @@ export default function Searchbar() {
       <SearchIcon className="fill-subtext/75 h-4 mx-4 group-focus-within:fill-subtext" />
       <input
         ref={inputRef}
-        placeholder="Causas, ideias e pessoas para apoiar"
+        placeholder="Apoie causas, ideias e pessoas"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         type="text"
         spellCheck="false"
-        className="border-none outline-none bg-transparent h-full grow text-text/75 text-xs font-semibold focus:text-text"
+        className="border-none outline-none bg-transparent h-full grow text-text/75 text-xs font-medium focus:text-text"
       />
       {searchQuery ? (
         <span
