@@ -10,7 +10,8 @@ import {
   where,
   Timestamp,
   addDoc,
-  onSnapshot,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 
 import { db } from "../_config/firebase";
@@ -62,7 +63,8 @@ export async function getComments(campaignId: any) {
   try {
     const q = query(
       collection(db, "comments"),
-      where("campaignId", "==", campaignId)
+      where("campaignId", "==", campaignId),
+      orderBy("createdIn", "desc")
     );
     const querySnapshot = await getDocs(q);
 
@@ -81,7 +83,7 @@ export async function getComments(campaignId: any) {
         };
       })
     );
-    // console.log(comments);
+    console.log(comments);
     return comments;
   } catch (error: any) {
     throw new Error("Error fetching comments:", error);

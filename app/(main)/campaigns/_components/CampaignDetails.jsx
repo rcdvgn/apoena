@@ -204,14 +204,14 @@ const CampaignDetails = ({
           </span>
         </div>
         <div className="flex flex-col grow min-h-0 overflow-auto rounded-b-2xl">
-          <div className={selectedTab === 0 ? "hidden" : ""}>
-            <CommentsTab
-              campaign={campaign}
-              setSelectedCampaign={setSelectedCampaign}
-              campaigns={campaigns}
-              setCampaigns={setCampaigns}
-            />
-          </div>
+          {/* <div className={selectedTab === 0 ? "hidden" : ""}> */}
+          <CommentsTab
+            campaign={campaign}
+            setSelectedCampaign={setSelectedCampaign}
+            campaigns={campaigns}
+            setCampaigns={setCampaigns}
+          />
+          {/* </div> */}
         </div>
       </div>
     </>
