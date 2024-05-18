@@ -15,7 +15,7 @@ import {
   ShareIcon,
   MoreIcon,
   ArrowIcon,
-} from "../../../_components/icons";
+} from "../../../../_components/icons";
 
 interface Campaign {
   pictureUrl: string;

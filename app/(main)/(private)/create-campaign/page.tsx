@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { InProgressIcon, CompletedIcon } from "../../_components/icons";
+import { InProgressIcon, CompletedIcon } from "../../../_components/icons";
 
 export default function CreateCampaign() {
   const sections = {

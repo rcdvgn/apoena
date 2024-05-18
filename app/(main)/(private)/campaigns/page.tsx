@@ -6,7 +6,7 @@ import Filters from "./_components/Filters";
 import CampaignCard from "./_components/CampaignCard";
 import CampaignDetails from "./_components/CampaignDetails";
 
-import { getCampaigns } from "../../_actions/actions";
+import { getCampaigns } from "../../../_actions/actions";
 
 // import { campaigns } from "./data";
 

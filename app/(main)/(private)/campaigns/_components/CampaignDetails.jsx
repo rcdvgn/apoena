@@ -2,15 +2,15 @@
 
 import React, { useState, useRef, useEffect, forwardRef } from "react";
 
-import useAutosizeTextArea from "../../../_utils/useAutosizeTextArea";
+import useAutosizeTextArea from "../../../../_utils/useAutosizeTextArea";
 
-import { createComment, getComments } from "../../../_actions/actions";
+import { createComment, getComments } from "../../../../_actions/actions";
 
-import { useAuth } from "../../../_contexts/AuthContext";
+import { useAuth } from "../../../../_contexts/AuthContext";
 
 // import { comments } from "../data";
 
-import { HeartIcon } from "../../../_components/icons";
+import { HeartIcon } from "../../../../_components/icons";
 
 const CommentsTab = ({
   campaign,

@@ -9,30 +9,46 @@ import Searchbar from "./Searchbar";
 
 import { SettingsIcon } from "../_components/icons";
 
-const Menu = () => {
-  return (
+const Menu = (user: any) => {
+  const { signOff } = useAuth();
+
+  const handleSignOff = () => {
+    signOff();
+  };
+
+  return user ? (
     <div className="bg-foreground rounded-lg absolute right-0 top-[135%] overflow-hidden select-none p-1">
-      <div className="rounded-md flex items-center justify-start gap-4 py-2 pl-3 pr-8 group hover:bg-primary-bg cursor-pointer ">
+      <Link
+        href="/settings"
+        className="rounded-md flex items-center justify-start gap-4 py-2 pl-3 pr-8 group hover:bg-primary-bg cursor-pointer "
+      >
         <SettingsIcon className="fill-intratext h-4 group-hover:fill-primary" />
         <span className="text-intratext text-sm font-semibold group-hover:text-primary">
           Configuracoes
         </span>
+      </Link>
+      <div
+        onClick={handleSignOff}
+        className="rounded-md flex items-center justify-start gap-4 py-2 pl-3 pr-8 group hover:bg-primary-bg cursor-pointer "
+      >
+        <SettingsIcon className="fill-intratext h-4 group-hover:fill-primary" />
+        <span className="text-intratext text-sm font-semibold group-hover:text-primary">
+          Sair
+        </span>
       </div>
     </div>
+  ) : (
+    "not auth"
   );
 };
 
 export default function Navbar() {
-  const { signOff } = useAuth();
+  const { user } = useAuth();
 
   const [menuVisible, setMenuVisible] = useState(false);
 
   const handleMenu = () => {
     setMenuVisible((currMenuVisibility) => !currMenuVisibility);
-  };
-
-  const handleSignOff = () => {
-    signOff();
   };
 
   return (
@@ -68,7 +84,7 @@ export default function Navbar() {
           className="h-8 rounded-full aspect-square bg-cover bg-center flex-shrink-0 cursor-pointer"
         ></div>
 
-        {menuVisible && <Menu />}
+        {menuVisible && <Menu user={user} />}
       </div>
     </div>
   );
