@@ -44,7 +44,7 @@ export default function SignUp() {
               type="email"
               spellCheck="false"
               placeholder="Seu melhor email"
-              className="w-[400px] h-12 input-1"
+              className="w-[400px] input-1"
             />
           </div>
         </div>
@@ -56,7 +56,7 @@ export default function SignUp() {
               onChange={handlePasswordChange}
               type="password"
               placeholder="Crie uma senha"
-              className="w-[400px] h-12 input-1"
+              className="w-[400px] input-1"
             />
           </div>
         </div>

@@ -27,7 +27,7 @@ export default function CreateAccount() {
     >
       <input
         placeholder="Primeiro e ultimo nome"
-        className="w-[400px] h-12 input-1"
+        className="w-[400px] input-1"
         value={name}
         onChange={handleNameChange}
       ></input>

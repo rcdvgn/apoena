@@ -12,10 +12,13 @@ const config: Config = {
         foreground: "rgb(var(--foreground) / <alpha-value>)",
         background: "rgb(var(--background) / <alpha-value>)",
         primary: "rgb(var(--primary) / <alpha-value>)",
+        "primary-bg": "rgb(var(--primary-bg) / <alpha-value>)",
         "primary-light": "rgb(var(--primary-light) / <alpha-value>)",
         "primary-dark": "rgb(var(--primary-dark) / <alpha-value>)",
         text: "rgb(var(--text) / <alpha-value>)",
         subtext: "rgb(var(--subtext) / <alpha-value>)",
+        intratext: "rgb(var(--intratext) / <alpha-value>)",
+
         secondary: "rgb(var(--secondary) / <alpha-value>)",
 
         like: "rgb(var(--like) / <alpha-value>)",
@@ -28,5 +31,6 @@ const config: Config = {
       },
     },
   },
+  plugins: [require("tailwind-scrollbar")],
 };
 export default config;

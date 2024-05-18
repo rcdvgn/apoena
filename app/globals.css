@@ -23,11 +23,13 @@ textarea::-webkit-scrollbar {
     --foreground: 255 255 255;
     --background: 237 244 247;
     --primary: 49 174 236;
+    --primary-bg: 227 244 253;
     --primary-light: 39 173 211;
     --primary-dark: 40 140 225;
     --secondary: 230 230 230;
-    --text: 54 54 54;
-    --subtext: 79 79 79;
+    --text: 50 50 50;
+    --subtext: 125 125 125;
+    --intratext: 79 79 79;
 
     --like: 255 51 51;
     --comment: 75 236 49;
@@ -42,17 +44,21 @@ textarea::-webkit-scrollbar {
   .container {
     @apply bg-foreground rounded-2xl;
   }
-  /* hover:-translate-y-0.5 */
+
   .btn-1 {
     @apply rounded-full bg-primary text-foreground font-semibold hover:opacity-80;
   }
 
   .btn-2 {
-    @apply bg-primary px-[15px] py-2.5 rounded-full font-bold text-sm text-foreground;
+    @apply bg-gradient-to-r from-[#1499DC] via-primary to-[#6AC4F1] px-4 py-2.5 rounded-full font-bold text-sm text-foreground hover:opacity-80;
+  }
+
+  .btn-3 {
+    @apply bg-transparent hover:bg-primary-bg px-4 py-2.5 rounded-full font-bold text-sm text-primary;
   }
 
   .input-1 {
-    @apply rounded-md px-3 border-2 outline-none border-secondary bg-transparent text-text font-medium text-sm focus:border-primary;
+    @apply rounded-xl px-3 h-[46px] ring-1 ring-inset outline-none border-none ring-secondary text-text font-semibold text-sm focus:ring-primary bg-[#f2f2f2] focus:bg-transparent focus:ring-2;
   }
 
   .hvr-1 {

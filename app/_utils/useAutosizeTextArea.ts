@@ -10,8 +10,8 @@ const useAutosizeTextArea = (
   useEffect(() => {
     if (newCommentInput) {
       // We need to reset the height momentarily to get the correct scrollHeight for the textarea
-      console.log(newCommentInput.style.height);
-      console.log(newCommentInput.scrollHeight);
+      // console.log(newCommentInput.style.height);
+      // console.log(newCommentInput.scrollHeight);
       newCommentInput.style.height = "0px";
       const scrollHeight = newCommentInput.scrollHeight;
       // We then set the height directly, outside of the render loop

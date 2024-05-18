@@ -77,7 +77,7 @@ export async function getComments(campaignId: any) {
         return {
           id: comment.id,
           ...comment.data(),
-          userId: userDoc.id,
+          // userId: userDoc.id,
           userName: userDoc.data().displayName,
           userPictureUrl: userDoc.data().pictureUrl,
         };
@@ -92,15 +92,16 @@ export async function getComments(campaignId: any) {
 
 export async function createComment(body: any, userId: any, campaignId: any) {
   try {
-    const docRef = await addDoc(collection(db, "comments"), {
+    const commentData = {
       body: body,
       userId: userId,
       campaignId: campaignId,
       likes: [],
       createdIn: Timestamp.now(),
-    });
-    const updatedComments = await getComments(campaignId);
-    return updatedComments;
+    };
+    const docRef = await addDoc(collection(db, "comments"), commentData);
+    // const updatedComments = await getComments(campaignId);
+    return { ...commentData, id: docRef.id };
   } catch (error: any) {
     throw new Error("Error creating comment:", error);
   }

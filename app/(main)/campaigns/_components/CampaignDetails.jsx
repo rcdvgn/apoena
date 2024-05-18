@@ -34,31 +34,42 @@ const CommentsTab = ({
     e.preventDefault();
 
     if (newComment.length) {
-      const updatedComments = await createComment(
+      const createdComment = await createComment(
         newComment,
         user.uid,
         campaign.uid
       );
-      const updatedCampaign = {
-        ...campaign,
-        data: { ...campaign.data, comments: updatedComments },
-      };
 
-      const updatedCampaigns = campaigns.map((item) => {
-        if (item.uid === campaign.uid) {
-          return updatedCampaign;
-        } else {
-          return item;
-        }
-      });
+      setComments([
+        {
+          ...createdComment,
+          userName: user.displayName,
+          userPictureUrl: user.pictureUrl,
+        },
+        ...comments,
+      ]);
+      setNewComment("");
 
-      setSelectedCampaign(updatedCampaign);
-      setCampaigns(updatedCampaigns);
+      // const updatedCampaign = {
+      //   ...campaign,
+      //   data: { ...campaign.data, comments: updatedComments },
+      // };
+
+      // const updatedCampaigns = campaigns.map((item) => {
+      //   if (item.uid === campaign.uid) {
+      //     return updatedCampaign;
+      //   } else {
+      //     return item;
+      //   }
+      // });
+
+      // setSelectedCampaign(updatedCampaign);
+      // setCampaigns(updatedCampaigns);
     }
   };
 
   useEffect(() => {
-    console.log("children");
+    // console.log("children");
     const fetchComments = async () => {
       const commentsData = await getComments(campaign.uid);
       setComments(commentsData);

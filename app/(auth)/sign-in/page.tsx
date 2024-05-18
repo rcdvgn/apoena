@@ -43,7 +43,7 @@ export default function SignIn() {
               type="email"
               spellCheck="false"
               placeholder="Insira seu email"
-              className="w-[400px] h-12 input-1"
+              className="w-[400px] input-1"
             />
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function SignIn() {
               onChange={handlePasswordChange}
               type="password"
               placeholder="Insira sua senha"
-              className="w-[400px] h-12 input-1"
+              className="w-[400px] input-1"
             />
           </div>
         </div>
