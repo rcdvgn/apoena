@@ -4,7 +4,7 @@ import {
   TagIcon,
   PinIcon,
   SupportersIcon,
-  CreatedInIcon,
+  CreatedAtIcon,
   InfoIcon,
   FullScreenIcon,
   CurrencyIcon,
@@ -23,7 +23,7 @@ interface Campaign {
   ownerPictureUrl: string;
   title: string;
   description: string;
-  createdIn: string;
+  createdAt: string;
   owner: string;
   isAd: boolean;
   isLiked: boolean;
@@ -83,7 +83,7 @@ export default function CampaignCard({
           </div>
         </div>
         <div className="grid place-items-center aspect-square h-full rounded-full hover:hvr-1 cursor-pointer">
-          <MoreIcon className="fill-text w-4" />
+          <MoreIcon className="fill-text w-3" />
         </div>
 
         {/* <button className="btn-2 ml-auto">Contribuir</button> */}

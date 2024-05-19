@@ -25,7 +25,7 @@ export async function createUser(userData: any) {
       description: "",
       website: "",
       accountType: "individual",
-      createdIn: Timestamp.now(),
+      createdAt: Timestamp.now(),
     };
 
     const docRef = doc(collection(db, "users"), userData.uid);
@@ -64,7 +64,7 @@ export async function getComments(campaignId: any) {
     const q = query(
       collection(db, "comments"),
       where("campaignId", "==", campaignId),
-      orderBy("createdIn", "desc")
+      orderBy("createdAt", "desc")
     );
     const querySnapshot = await getDocs(q);
 
@@ -97,7 +97,7 @@ export async function createComment(body: any, userId: any, campaignId: any) {
       userId: userId,
       campaignId: campaignId,
       likes: [],
-      createdIn: Timestamp.now(),
+      createdAt: Timestamp.now(),
     };
     const docRef = await addDoc(collection(db, "comments"), commentData);
     // const updatedComments = await getComments(campaignId);

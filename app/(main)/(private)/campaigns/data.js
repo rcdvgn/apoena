@@ -14,7 +14,7 @@ export const campaigns = [
     title: "Projeto Floresta Viva",
     description:
       "O Projeto Floresta Viva visa a conservação e restauração de áreas florestais degradadas na região amazônica. Por meio do reflorestamento e da educação ambiental, buscamos promover a biodiversidade, mitigar as mudanças climáticas e gerar oportunidades econômicas sustentáveis para comunidades locais.",
-    createdIn: "2023-06-15",
+    createdAt: "2023-06-15",
     owner: "Associação Amigos da Floresta",
     isAd: true,
     isLiked: false,
@@ -40,7 +40,7 @@ export const campaigns = [
     title: "Água Limpa para Todos",
     description:
       "O projeto visa fornecer acesso à água potável em comunidades rurais do semiárido brasileiro. Utilizaremos tecnologias de captação de água da chuva e sistemas de filtragem para garantir água limpa e segura para consumo humano e agrícola.",
-    createdIn: "2022-09-20",
+    createdAt: "2022-09-20",
     owner: "Thiago Almeida",
     isAd: true,
     isLiked: true,
@@ -66,7 +66,7 @@ export const campaigns = [
     title: "Reciclando Vidas",
     description:
       "Iniciativa que promove a coleta seletiva e a reciclagem de resíduos sólidos em áreas urbanas. Além de reduzir a poluição ambiental, oferecemos oportunidades de emprego para catadores de materiais recicláveis e conscientização sobre a importância da preservação do meio ambiente.",
-    createdIn: "2023-04-10",
+    createdAt: "2023-04-10",
     owner: "Cooperativa ReciclaMais",
     isAd: true,
     isLiked: false,
@@ -92,7 +92,7 @@ export const campaigns = [
     title: "Sementes da Esperança",
     description:
       "Promovemos o cultivo agroecológico em comunidades rurais desfavorecidas. Oferecemos capacitação em práticas agrícolas sustentáveis, distribuição de sementes orgânicas e apoio técnico para garantir a segurança alimentar e gerar renda para famílias locais.",
-    createdIn: "2023-01-05",
+    createdAt: "2023-01-05",
     owner: "Instituto Terra Fértil",
     isAd: false,
     isLiked: true,
@@ -118,7 +118,7 @@ export const campaigns = [
     title: "Preservando Nossos Mares",
     description:
       "Iniciativa para a conservação dos ecossistemas marinhos e a proteção da biodiversidade costeira. Realizamos a limpeza de praias, monitoramento de espécies marinhas e campanhas de conscientização sobre a poluição marinha.",
-    createdIn: "2022-11-30",
+    createdAt: "2022-11-30",
     owner: "ONG Mar Vivo",
     isAd: true,
     isLiked: true,
@@ -144,7 +144,7 @@ export const campaigns = [
     title: "Energia Solar nas Escolas",
     description:
       "Implantamos sistemas de energia solar em escolas públicas, reduzindo custos de eletricidade e promovendo a educação ambiental. Além disso, capacitamos professores e alunos para a gestão sustentável da energia.",
-    createdIn: "2023-02-15",
+    createdAt: "2023-02-15",
     owner: "Associação Sol Sustentável",
     isAd: false,
     isLiked: false,
@@ -170,7 +170,7 @@ export const campaigns = [
     title: "Ar Puro para Respirar",
     description:
       "Campanha de reflorestamento urbano para combater a poluição do ar e melhorar a qualidade de vida em áreas urbanas. Plantamos árvores nativas, promovemos a conscientização ambiental e incentivamos a participação da comunidade.",
-    createdIn: "2023-07-20",
+    createdAt: "2023-07-20",
     owner: "Movimento Verde Vivo",
     isAd: true,
     isLiked: true,
@@ -196,7 +196,7 @@ export const campaigns = [
     title: "Cultivando o Futuro",
     description:
       "Iniciativa que promove a agricultura familiar sustentável em comunidades rurais. Oferecemos treinamento em técnicas agroecológicas, acesso a mercados justos e apoio para a comercialização de produtos orgânicos.",
-    createdIn: "2022-12-10",
+    createdAt: "2022-12-10",
     owner: "Cooperativa Agricultura Sustentável",
     isAd: true,
     isLiked: true,
@@ -222,7 +222,7 @@ export const campaigns = [
     title: "Guardiões das Florestas",
     description:
       "Programa de voluntariado ambiental que visa a proteção e monitoramento de áreas de conservação florestal. Realizamos patrulhas para prevenir desmatamento ilegal, combater incêndios florestais e promover a educação ambiental.",
-    createdIn: "2023-03-05",
+    createdAt: "2023-03-05",
     owner: "ONG Verdejando",
     isAd: false,
     isLiked: false,
@@ -248,7 +248,7 @@ export const campaigns = [
     title: "Conexão Natureza",
     description:
       "Iniciativa que promove o turismo sustentável em áreas naturais protegidas. Desenvolvemos trilhas ecológicas, estruturas de hospedagem sustentável e programas de educação ambiental para visitantes.",
-    createdIn: "2023-08-10",
+    createdAt: "2023-08-10",
     owner: "Associação EcoTurismo",
     isAd: true,
     isLiked: true,

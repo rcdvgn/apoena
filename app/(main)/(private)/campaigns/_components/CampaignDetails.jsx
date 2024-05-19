@@ -75,7 +75,7 @@ const CommentsTab = ({
       setComments(commentsData);
     };
     fetchComments();
-  }, []);
+  }, [campaign]);
 
   return (
     <>

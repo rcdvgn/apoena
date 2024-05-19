@@ -125,7 +125,7 @@ export function MoreIcon({ className }: { className: string }) {
   );
 }
 
-export function CreatedInIcon({ className }: { className: string }) {
+export function CreatedAtIcon({ className }: { className: string }) {
   return (
     <svg
       className={className}

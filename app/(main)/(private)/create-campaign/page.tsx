@@ -42,7 +42,7 @@ export default function CreateCampaign() {
   };
 
   return (
-    <div className="w-full grow flex items-center justify-center border-2">
+    <div className="w-full grow flex items-center justify-center">
       <div
         style={{
           height: "80vh",
