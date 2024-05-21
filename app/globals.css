@@ -30,6 +30,10 @@ textarea::-webkit-scrollbar {
     --text: 50 50 50;
     --subtext: 125 125 125;
     --intratext: 79 79 79;
+    --placeholder: 192 192 192;
+    --negative-space: 242 242 242;
+
+    --warning: 236 40 40;
 
     --like: 255 51 51;
     --comment: 75 236 49;
@@ -58,11 +62,15 @@ textarea::-webkit-scrollbar {
   }
 
   .input-1 {
-    @apply rounded-xl px-3 h-[46px] ring-1 ring-inset outline-none border-none ring-secondary text-text font-semibold text-sm focus:ring-primary bg-[#f2f2f2] focus:bg-transparent focus:ring-2;
+    @apply rounded-xl px-3 h-[46px] ring-1 ring-inset outline-none border-none ring-secondary text-text font-semibold text-sm focus:ring-primary bg-negative-space focus:bg-transparent focus:ring-2;
   }
 
   .input-2 {
-    @apply text-center px-3 h-[46px] border-b-[1px] outline-none border-secondary text-text font-semibold text-sm focus:border-primary bg-[#f2f2f2] bg-transparent focus:border-b-2;
+    @apply text-center px-3 h-[46px] border-b-[1px] outline-none border-secondary text-text font-semibold text-sm focus:border-primary bg-negative-space bg-transparent focus:border-b-2;
+  }
+
+  .textarea-1 {
+    @apply resize-none rounded-xl p-3 ring-1 ring-inset outline-none border-none ring-secondary text-text font-semibold text-sm focus:ring-primary bg-negative-space focus:bg-transparent focus:ring-2;
   }
 
   .hvr-1 {

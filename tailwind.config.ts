@@ -18,8 +18,12 @@ const config: Config = {
         text: "rgb(var(--text) / <alpha-value>)",
         subtext: "rgb(var(--subtext) / <alpha-value>)",
         intratext: "rgb(var(--intratext) / <alpha-value>)",
+        placeholder: "rgb(var(--placeholder) / <alpha-value>)",
+        "negative-space": "rgb(var(--negative-space) / <alpha-value>)",
 
         secondary: "rgb(var(--secondary) / <alpha-value>)",
+
+        warning: "rgb(var(--warning) / <alpha-value>)",
 
         like: "rgb(var(--like) / <alpha-value>)",
         comment: "rgb(var(--comment) / <alpha-value>)",
