@@ -5,10 +5,13 @@ import { useAuth } from "../../_contexts/AuthContext";
 
 import { createUser } from "../../_actions/actions";
 
+import { SaveIcon } from "../../_components/icons";
+
 export default function CreateAccount() {
   const { user, setUser } = useAuth();
   const [name, setName] = useState("");
   const [selectedCampaignTypes, setSelectedCampaignTypes] = useState<any>([]);
+  const [savedCampaigns, setSavedCampaigns] = useState<any>([]);
 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
@@ -31,6 +34,10 @@ export default function CreateAccount() {
         ? setSelectedCampaignTypes([type, ...selectedCampaignTypes])
         : "";
     }
+  };
+
+  const handleCampaignSave = (campaign: any) => {
+    console.log(campaign);
   };
 
   const sections = {
@@ -61,13 +68,47 @@ export default function CreateAccount() {
                 className={`capitalize cursor-pointer btn-4 py-2 px-4 mb-4 rounded-full font-semibold text-sm ${
                   selectedCampaignTypes.includes(type)
                     ? "bg-primary text-foreground"
-                    : "bg-secondary text-text"
+                    : "bg-negative-space text-intratext hover:bg-primary-bg hover:text-primary"
                 }`}
               >
                 {type}
               </div>
             );
           })}
+        </div>
+      ),
+    },
+    2: {
+      title: "Bem vindo ao Apoena!",
+      subtitle:
+        "Separamos algumas iniciativas que combinam com voce. Companhas selecionadas agora ficarao salvas no seu perfil, caso decida apoia-las no futuro.",
+      form: (
+        <div className="flex flex-col gap-4">
+          <div className="rounded-lg p-4 cursor-pointer hover:bg-negative-space">
+            <div className="flex gap-4">
+              <div
+                style={{
+                  backgroundImage: `url(https://images.unsplash.com/photo-1473594659356-a404044aa2c2?q=80&w=426&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
+                }}
+                className="aspect-square h-12 rounded-lg bg-cover bg-center flex-shrink-0"
+              ></div>
+              <div className="">
+                <div className="flex justify-between mb-1">
+                  <span className="text-text text-sm font-extrabold">
+                    Cultivando o Futuro
+                  </span>
+                  <SaveIcon className="stroke-primary h-[14px]" fill={false} />
+                </div>
+                <div className="line-clamp-3 text-intratext text-[13px] font-medium">
+                  Iniciativa que promove a agricultura familiar sustentável em
+                  comunidades rurais. Oferecemos treinamento em técnicas
+                  agroecológicas, acesso a mercados justos e apoio para a
+                  comercialização de produtos orgânicos.
+                </div>
+              </div>
+            </div>
+            <div className=""></div>
+          </div>
         </div>
       ),
     },
