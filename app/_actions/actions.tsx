@@ -106,3 +106,42 @@ export async function createComment(body: any, userId: any, campaignId: any) {
     throw new Error("Error creating comment:", error);
   }
 }
+
+export async function createCampaign(
+  userId: any,
+  title: any,
+  pictureUrl: any,
+  description: any,
+  affectedRegion: any,
+  type: any,
+  goal: any,
+  photos: any,
+  isNonProfit: any,
+  isCombu: any,
+  isAd: any
+) {
+  try {
+    const campaignData = {
+      title: title,
+      pictureUrl: pictureUrl,
+      description: description,
+      affectedRegion: affectedRegion,
+      type: type,
+      goal: goal,
+      photos: photos,
+      isNonProfit: isNonProfit,
+      isCombu: isCombu,
+      isAd: isAd,
+      raised: 0,
+      likes: [],
+      saves: [],
+      shares: 0,
+      userId: userId,
+      createdAt: Timestamp.now(),
+    };
+    const docRef = await addDoc(collection(db, "campaigns"), campaignData);
+    return { ...campaignData, id: docRef.id };
+  } catch (error: any) {
+    throw new Error("Error creating campaign:", error);
+  }
+}

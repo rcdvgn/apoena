@@ -20,6 +20,8 @@ const config: Config = {
         intratext: "rgb(var(--intratext) / <alpha-value>)",
         placeholder: "rgb(var(--placeholder) / <alpha-value>)",
         "negative-space": "rgb(var(--negative-space) / <alpha-value>)",
+        combu: "rgb(var(--combu) / <alpha-value>)",
+        combudark: "rgb(var(--combudark) / <alpha-value>)",
 
         secondary: "rgb(var(--secondary) / <alpha-value>)",
 

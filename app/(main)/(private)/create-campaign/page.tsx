@@ -2,13 +2,22 @@
 
 import React, { useState, useRef } from "react";
 
+import { Switch } from "../../../_components/custom";
+
+import { useAuth } from "../../../_contexts/AuthContext";
+
+import { createCampaign } from "@/app/_actions/actions";
+
 import {
   InProgressIcon,
   CompletedIcon,
   CameraIcon,
   AddPhotoIcon,
   TrashIcon,
+  InfoIcon,
 } from "../../../_components/icons";
+
+import { useRouter } from "next/navigation";
 
 const titleStyle = "text-text text-base font-extrabold mb-1";
 const subtitleStyle = "text-[13px] text-subtext font-medium mb-3";
@@ -86,7 +95,21 @@ const CampaignDescription = ({
   );
 };
 
-const CampaignConfig = () => {
+const CampaignConfig = ({
+  affectedRegion,
+  setAffectedRegion,
+  type,
+  setType,
+  goal,
+  setGoal,
+}: {
+  affectedRegion: any;
+  setAffectedRegion: any;
+  type: any;
+  setType: any;
+  goal: any;
+  setGoal: any;
+}) => {
   return (
     <>
       {/* <div className="text-text text-base font-extrabold mb-4">
@@ -97,38 +120,43 @@ const CampaignConfig = () => {
           <div className={titleStyle}>Meta de arrecadação</div>
           <div className={subtitleStyle}>
             Quanto voce considera o suficiente para financiar seu projeto? Voce
-            pode alterar esse valor depois
+            pode alterar esse valor depois.
           </div>
           <input
-            type="text"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            type="number"
             className="input-1 w-full"
             placeholder="Valor em Reais"
           />
         </div>
 
         <div className="">
-          <div className={titleStyle}>Meta de arrecadação</div>
+          <div className={titleStyle}>Tipo de campanha</div>
           <div className={subtitleStyle}>
-            Quanto voce considera o suficiente para financiar seu projeto? Voce
-            pode alterar esse valor depois
+            Escolha a opcao que melhor se enquadra com o tipo de campanha que
+            voce quer criar.
           </div>
           <input
+            value={type}
+            onChange={(e) => setType(e.target.value)}
             type="text"
             className="input-1 w-full"
-            placeholder="Valor em Reais"
+            placeholder="Tipo de campanha"
           />
         </div>
 
         <div className="">
-          <div className={titleStyle}>Meta de arrecadação</div>
+          <div className={titleStyle}>Região afetada</div>
           <div className={subtitleStyle}>
-            Quanto voce considera o suficiente para financiar seu projeto? Voce
-            pode alterar esse valor depois
+            Que regiao brasileira e beneficiada ou hospeda a sua campanha?
           </div>
           <input
+            value={affectedRegion}
+            onChange={(e) => setAffectedRegion(e.target.value)}
             type="text"
             className="input-1 w-full"
-            placeholder="Valor em Reais"
+            placeholder="e. g. Ilha do Combu"
           />
         </div>
       </div>
@@ -201,19 +229,103 @@ const CampaignPhotos = ({
   );
 };
 
+const CampaignAdvanced = ({
+  isNonProfit,
+  setIsNonProfit,
+  isCombu,
+  setIsCombu,
+  isAd,
+  setIsAd,
+}: {
+  isNonProfit: any;
+  setIsNonProfit: any;
+  isCombu: any;
+  setIsCombu: any;
+  isAd: any;
+  setIsAd: any;
+}) => {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="p-4 rounded-xl">
+        <div className="flex justify-between items-center">
+          <span className={titleStyle}>Sem fins lucrativos</span>
+          <Switch
+            value={isNonProfit}
+            setValue={setIsNonProfit}
+            onColor="primary"
+            offColor="secondary"
+          />
+        </div>
+        <div className={subtitleStyle}>
+          Campanhas sem fins lucrativos nao usam o dinheiro arrecadado para
+          beneficio pessoal de seu(s) organizador(es). Selecione essa opcao se a
+          sua campanha ira destinar seus ganhos unicamente para sua causa.
+        </div>
+      </div>
+
+      <div className="p-4 rounded-xl">
+        <div className="flex justify-between items-center">
+          <span className={titleStyle}>Promocao paga</span>
+          <Switch
+            value={isAd}
+            setValue={setIsAd}
+            onColor="primary"
+            offColor="secondary"
+          />
+        </div>
+        <div className={subtitleStyle}>
+          Promocoes pagas sao anúncios dentro da plataforma, campanhas desse
+          tipo sao exibidos para mais pessoas.
+        </div>
+      </div>
+
+      <div className="p-4 rounded-xl bg-combu">
+        <div className="flex justify-between items-center">
+          <span className="text-foreground text-base font-extrabold mb-1">
+            Campanha Combu
+          </span>
+          <Switch
+            value={isCombu}
+            setValue={setIsCombu}
+            onColor="primary"
+            offColor="secondary"
+          />
+        </div>
+        <div className="text-[13px] text-foreground/80 font-medium mb-3">
+          Campanhas voltadas para o beneficio da Ilha do Combu e seus moradores
+          fazem parte do programa de visibilidade Combu!
+        </div>
+        <div className="flex items-center gap-1">
+          <InfoIcon className="fill-foreground h-3" />
+          <span className="text-[13px] text-foreground font-semibold">
+            Aprender mais sobre Campanhas Combu
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function CreateCampaign() {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  const [section, setSection] = useState<keyof typeof sections>(0);
+
   const [pictureUrl, setPictureUrl] = useState("");
   const [title, setTitle] = useState("");
-  const [section, setSection] = useState<keyof typeof sections>(0);
+
   const [description, setDescription] = useState("");
-  // const [type, setType] = useState("");
+
+  const [affectedRegion, setAffectedRegion] = useState("");
+  const [type, setType] = useState("");
+  const [goal, setGoal] = useState(0);
 
   const [photos, setPhotos] = useState([]);
-  // const [goal, setGoal] = useState(0);
-  // const [isAd, setIsAd] = useState("");
-  // const [isCombu, setIsCombu] = useState("");
-  // const [isNonProfit, setIsNonProfit] = useState("");
-  // const [affectedRegion, setAffectedRegion] = useState("");
+
+  const [isAd, setIsAd] = useState(false);
+  const [isCombu, setIsCombu] = useState(false);
+  const [isNonProfit, setIsNonProfit] = useState(false);
 
   const sections = {
     0: {
@@ -238,14 +350,39 @@ export default function CreateCampaign() {
         />
       ),
     },
-    2: { title: "Etapa 3", progress: 40, form: <CampaignConfig /> },
+    2: {
+      title: "Etapa 3",
+      progress: 40,
+      form: (
+        <CampaignConfig
+          affectedRegion={affectedRegion}
+          setAffectedRegion={setAffectedRegion}
+          type={type}
+          setType={setType}
+          goal={goal}
+          setGoal={setGoal}
+        />
+      ),
+    },
     3: {
       title: "Etapa 4",
       progress: 60,
       form: <CampaignPhotos photos={photos} setPhotos={setPhotos} />,
     },
-    4: { title: "Etapa 5", progress: 80, form: <></> },
-    5: { title: "Etapa 6", progress: 100, form: <></> },
+    4: {
+      title: "Etapa 5",
+      progress: 80,
+      form: (
+        <CampaignAdvanced
+          isNonProfit={isNonProfit}
+          setIsNonProfit={setIsNonProfit}
+          isCombu={isCombu}
+          setIsCombu={setIsCombu}
+          isAd={isAd}
+          setIsAd={setIsAd}
+        />
+      ),
+    },
   };
 
   // const handleSubmit = (e: any) => {
@@ -253,11 +390,37 @@ export default function CreateCampaign() {
   // };
 
   const handleNext = () => {
+    if (section === 0 && (pictureUrl === "" || title === "")) return;
     setSection((prevSection) => (prevSection + 1) as keyof typeof sections);
   };
 
   const handlePrev = () => {
     setSection((prevSection) => (prevSection - 1) as keyof typeof sections);
+  };
+
+  const handleCancel = () => {
+    router.push("/campaigns");
+  };
+
+  const handleSubmit = async () => {
+    // TODO: CHECK FIELDS
+    // TODO: MULTIPLY GOAL BY 100
+    // TODO: CHANGE AFFECTED REGION TO ILHA DO COMBU IF ISCOMBU === TRUE
+    const createdCampaign = await createCampaign(
+      user.uid,
+      title,
+      pictureUrl,
+      description,
+      affectedRegion,
+      type,
+      goal,
+      photos,
+      isNonProfit,
+      isCombu,
+      isAd
+    );
+    console.log(createdCampaign);
+    router.push("/campaigns");
   };
 
   return (
@@ -273,7 +436,7 @@ export default function CreateCampaign() {
           <div className="flex items-center p-4 gap-4">
             <div
               style={{ backgroundImage: `url(${pictureUrl})` }}
-              className="rounded-2xl h-16 aspect-square bg-cover bg-center flex-shrink-0"
+              className="rounded-lg h-12 aspect-square bg-cover bg-center flex-shrink-0"
             ></div>
             <span className="text-sm font-extrabold text-text">{title}</span>
           </div>
@@ -288,9 +451,15 @@ export default function CreateCampaign() {
         </div>
         <div className="p-4 grow overflow-auto">{sections[section].form}</div>
         <div className="flex justify-between items-center p-4">
-          <button className="btn-3" onClick={handlePrev}>
-            Voltar
-          </button>
+          {section > 0 ? (
+            <button className="btn-3" onClick={handlePrev}>
+              Voltar
+            </button>
+          ) : (
+            <button className="btn-3" onClick={handleCancel}>
+              Cancelar
+            </button>
+          )}
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
               <span className="font-semibold text-intratext text-[11px]">
@@ -299,7 +468,9 @@ export default function CreateCampaign() {
               <CompletedIcon className="h-3" />
             </div>
             {sections[section].progress == 80 ? (
-              <button className="btn-2">Publicar!</button>
+              <button className="btn-2" onClick={handleSubmit}>
+                Publicar!
+              </button>
             ) : (
               <button className="btn-3" onClick={handleNext}>
                 Continuar

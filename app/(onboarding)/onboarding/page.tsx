@@ -84,7 +84,7 @@ export default function CreateAccount() {
         "Separamos algumas iniciativas que combinam com voce. Companhas selecionadas agora ficarao salvas no seu perfil, caso decida apoia-las no futuro.",
       form: (
         <div className="flex flex-col gap-4">
-          <div className="rounded-lg p-4 cursor-pointer hover:bg-negative-space">
+          <div className="group rounded-lg p-4 cursor-pointer hover:bg-primary/10">
             <div className="flex gap-4">
               <div
                 style={{
@@ -97,7 +97,10 @@ export default function CreateAccount() {
                   <span className="text-text text-sm font-extrabold">
                     Cultivando o Futuro
                   </span>
-                  <SaveIcon className="stroke-primary h-[14px]" fill={false} />
+                  <SaveIcon
+                    className="group-hover:visible invisible stroke-primary h-[14px]"
+                    fill={false}
+                  />
                 </div>
                 <div className="line-clamp-3 text-intratext text-[13px] font-medium">
                   Iniciativa que promove a agricultura familiar sustentável em

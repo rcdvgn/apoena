@@ -72,7 +72,7 @@ export default function Navbar() {
         className="text-foreground font-bold text-[13px] hover:opacity-80"
         href="/create-campaign"
       >
-        Sobre
+        Criar campanha
       </Link>
       <Searchbar />
       <div className="relative">

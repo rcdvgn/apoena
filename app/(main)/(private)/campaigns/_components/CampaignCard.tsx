@@ -201,7 +201,7 @@ export default function CampaignCard({
           <span className="text-xs font-bold text-save">24</span>
           <div className="group relative grid place-items-center h-8 w-8 cursor-pointer">
             <div className="transition-all absolute aspect-square h-0 top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-save/10 group-hover:h-full"></div>
-            <SaveIcon className="fill-save h-3" fill={false} />
+            <SaveIcon className="fill-save h-3" fill={true} />
           </div>
         </div>
         <div className="flex flex-row-reverse items-center gap-1">

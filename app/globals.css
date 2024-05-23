@@ -26,12 +26,14 @@ textarea::-webkit-scrollbar {
     --primary-bg: 227 244 253;
     --primary-light: 39 173 211;
     --primary-dark: 40 140 225;
-    --secondary: 230 230 230;
+    --secondary: 204 204 204;
     --text: 50 50 50;
     --subtext: 125 125 125;
     --intratext: 79 79 79;
     --placeholder: 192 192 192;
     --negative-space: 242 242 242;
+    --combu: 236 128 49;
+    --combudark: 140 67 13;
 
     --warning: 236 40 40;
 
