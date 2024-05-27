@@ -23,9 +23,9 @@ export const PaymentProvider = ({ children }) => {
     setCampaignTitle(null);
   }, []);
 
-  //   useEffect(() => {
-  //     document.body.style.overflow = isOpen ? "hidden" : "unset";
-  //   }, [isOpen]);
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "unset";
+  }, [isOpen]);
 
   return (
     <PaymentContext.Provider
