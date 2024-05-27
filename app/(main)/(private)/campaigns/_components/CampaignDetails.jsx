@@ -17,8 +17,8 @@ import { HeartIcon } from "../../../../_components/icons";
 const CommentsTab = ({
   campaign,
   setSelectedCampaign,
-  campaigns,
-  setCampaigns,
+  // campaigns,
+  // setCampaigns,
 }) => {
   const { user } = useAuth();
 
@@ -71,7 +71,6 @@ const CommentsTab = ({
   };
 
   useEffect(() => {
-    // console.log("children");
     const fetchComments = async () => {
       const commentsData = await getComments(campaign.uid);
       setComments(commentsData);
@@ -162,8 +161,8 @@ const CommentsTab = ({
 const CampaignDetails = ({
   campaign,
   setSelectedCampaign,
-  campaigns,
-  setCampaigns,
+  // campaigns,
+  // setCampaigns,
 }) => {
   const { openPaymentModal } = usePaymentModal();
 
@@ -229,8 +228,8 @@ const CampaignDetails = ({
           <CommentsTab
             campaign={campaign}
             setSelectedCampaign={setSelectedCampaign}
-            campaigns={campaigns}
-            setCampaigns={setCampaigns}
+            // campaigns={campaigns}
+            // setCampaigns={setCampaigns}
           />
           {/* </div> */}
         </div>

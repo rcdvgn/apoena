@@ -63,9 +63,13 @@ export default function CampaignCard({
     );
   };
 
+  const handleSelectCampaign = () => {
+    setSelectedCampaign(campaign);
+  };
+
   return (
     <div
-      onClick={() => setSelectedCampaign(campaign)}
+      onClick={handleSelectCampaign}
       className="container shadow-sm h-auto w-full hover:shadow-md hover:bg-foreground/50 transition-all ease-in-out"
     >
       <div className="group flex items-center justify-between h-[65px] px-4 py-3 cursor-pointer">

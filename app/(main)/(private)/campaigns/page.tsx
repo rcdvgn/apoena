@@ -19,7 +19,6 @@ export default function Campaigns() {
       const campaignsData = await getCampaigns();
       setCampaigns(campaignsData);
       campaignsData !== undefined ? setSelectedCampaign(campaignsData[0]) : "";
-      // TODO: prevent unecessary data fetches from useEffects
     };
 
     fetchCampaigns();
@@ -52,8 +51,8 @@ export default function Campaigns() {
               <CampaignDetails
                 campaign={selectedCampaign}
                 setSelectedCampaign={setSelectedCampaign}
-                campaigns={campaigns}
-                setCampaigns={setCampaigns}
+                // campaigns={campaigns}
+                // setCampaigns={setCampaigns}
               />
             )}
           </div>

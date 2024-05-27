@@ -41,7 +41,7 @@ export async function getCampaigns() {
   try {
     const querySnapshot = await getDocs(collection(db, "campaigns"));
     const campaignsData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
+      uid: doc.id,
       ...doc.data(),
     }));
     return campaignsData;
@@ -66,6 +66,7 @@ export async function getComments(campaignId: any) {
       where("campaignId", "==", campaignId),
       orderBy("createdAt", "desc")
     );
+
     const querySnapshot = await getDocs(q);
 
     const comments = await Promise.all(
@@ -78,6 +79,7 @@ export async function getComments(campaignId: any) {
           id: comment.id,
           ...comment.data(),
           // userId: userDoc.id,
+
           userName: userDoc.data().displayName,
           userPictureUrl: userDoc.data().pictureUrl,
         };
@@ -121,26 +123,30 @@ export async function createCampaign(
   isAd: any
 ) {
   try {
-    const campaignData = {
-      title: title,
-      pictureUrl: pictureUrl,
-      description: description,
-      affectedRegion: affectedRegion,
-      type: type,
-      goal: goal,
-      photos: photos,
-      isNonProfit: isNonProfit,
-      isCombu: isCombu,
-      isAd: isAd,
-      raised: 0,
-      likes: [],
-      saves: [],
-      shares: 0,
-      userId: userId,
-      createdAt: Timestamp.now(),
-    };
-    const docRef = await addDoc(collection(db, "campaigns"), campaignData);
-    return { ...campaignData, id: docRef.id };
+    const idRef = doc(db, "campaigns", "");
+    const campaignId = idRef.id;
+    console.log(campaignId);
+
+    // const campaignData = {
+    //   title: title,
+    //   pictureUrl: pictureUrl,
+    //   description: description,
+    //   affectedRegion: affectedRegion,
+    //   type: type,
+    //   goal: parseInt(goal),
+    //   photos: photos,
+    //   isNonProfit: isNonProfit,
+    //   isCombu: isCombu,
+    //   isAd: isAd,
+    //   raised: 0,
+    //   likes: [],
+    //   saves: [],
+    //   shares: 0,
+    //   userId: userId,
+    //   createdAt: Timestamp.now(),
+    // };
+    // const docRef = await addDoc(collection(db, "campaigns"), campaignData);
+    // return { ...campaignData, id: docRef.id };
   } catch (error: any) {
     throw new Error("Error creating campaign:", error);
   }
