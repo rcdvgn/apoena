@@ -3,6 +3,8 @@ import { Figtree } from "next/font/google";
 import "./globals.css";
 
 import { AuthProvider } from "./_contexts/AuthContext";
+import { PaymentProvider } from "./_contexts/PaymentContext";
+import PaymentModal from "./_modals/PaymentModal";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -24,7 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={figtree.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <PaymentProvider>
+            {children}
+            <PaymentModal />
+          </PaymentProvider>
+        </AuthProvider>
       </body>
     </html>
   );

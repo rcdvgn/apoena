@@ -2,6 +2,8 @@
 
 import React, { useState, useRef, useEffect, forwardRef } from "react";
 
+import { usePaymentModal } from "../../../../_contexts/PaymentContext";
+
 import useAutosizeTextArea from "../../../../_utils/useAutosizeTextArea";
 
 import { createComment, getComments } from "../../../../_actions/actions";
@@ -163,9 +165,15 @@ const CampaignDetails = ({
   campaigns,
   setCampaigns,
 }) => {
+  const { openPaymentModal } = usePaymentModal();
+
   // const newCommentInput = useRef(null);
   const tabs = ["Details", "Comments"];
   const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleContribute = () => {
+    openPaymentModal("Campanha teste");
+  };
 
   return (
     <>
@@ -187,7 +195,9 @@ const CampaignDetails = ({
         <div className="flex justify-between">
           <div className=""></div>
           <div className="">
-            <button className="btn-2">Contribuir</button>
+            <button onClick={handleContribute} className="btn-2">
+              Contribuir
+            </button>
           </div>
         </div>
       </div>
