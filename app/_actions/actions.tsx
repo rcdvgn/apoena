@@ -123,30 +123,26 @@ export async function createCampaign(
   isAd: any
 ) {
   try {
-    const idRef = doc(db, "campaigns", "");
-    const campaignId = idRef.id;
-    console.log(campaignId);
-
-    // const campaignData = {
-    //   title: title,
-    //   pictureUrl: pictureUrl,
-    //   description: description,
-    //   affectedRegion: affectedRegion,
-    //   type: type,
-    //   goal: parseInt(goal),
-    //   photos: photos,
-    //   isNonProfit: isNonProfit,
-    //   isCombu: isCombu,
-    //   isAd: isAd,
-    //   raised: 0,
-    //   likes: [],
-    //   saves: [],
-    //   shares: 0,
-    //   userId: userId,
-    //   createdAt: Timestamp.now(),
-    // };
-    // const docRef = await addDoc(collection(db, "campaigns"), campaignData);
-    // return { ...campaignData, id: docRef.id };
+    const campaignData = {
+      title: title,
+      pictureUrl: pictureUrl,
+      description: description,
+      affectedRegion: affectedRegion,
+      type: type,
+      goal: parseInt(goal),
+      photos: photos,
+      isNonProfit: isNonProfit,
+      isCombu: isCombu,
+      isAd: isAd,
+      raised: 0,
+      likes: [],
+      saves: [],
+      shares: 0,
+      userId: userId,
+      createdAt: Timestamp.now(),
+    };
+    const docRef = await addDoc(collection(db, "campaigns"), campaignData);
+    return { ...campaignData, id: docRef.id };
   } catch (error: any) {
     throw new Error("Error creating campaign:", error);
   }
