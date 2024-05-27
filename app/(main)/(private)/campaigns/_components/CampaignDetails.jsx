@@ -171,7 +171,7 @@ const CampaignDetails = ({
   const [selectedTab, setSelectedTab] = useState(0);
 
   const handleContribute = () => {
-    openPaymentModal("Campanha teste");
+    openPaymentModal(campaign);
   };
 
   return (

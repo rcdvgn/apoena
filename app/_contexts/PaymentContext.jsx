@@ -10,17 +10,17 @@ import {
 const PaymentContext = createContext();
 
 export const PaymentProvider = ({ children }) => {
-  const [campaignTitle, setCampaignTitle] = useState(null);
+  const [campaignData, setCampaignData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const openPaymentModal = useCallback((content) => {
-    setCampaignTitle(content);
+    setCampaignData(content);
     setIsOpen(true);
   }, []);
 
   const closePaymentModal = useCallback(() => {
     setIsOpen(false);
-    setCampaignTitle(null);
+    setCampaignData(null);
   }, []);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const PaymentProvider = ({ children }) => {
 
   return (
     <PaymentContext.Provider
-      value={{ isOpen, campaignTitle, openPaymentModal, closePaymentModal }}
+      value={{ isOpen, campaignData, openPaymentModal, closePaymentModal }}
     >
       {children}
     </PaymentContext.Provider>
