@@ -11,7 +11,7 @@ import {
   Timestamp,
   addDoc,
   orderBy,
-  limit,
+  documentId,
 } from "firebase/firestore";
 
 import { db } from "../_config/firebase";
@@ -40,6 +40,26 @@ export async function createUser(userData: any) {
 export async function getCampaigns() {
   try {
     const querySnapshot = await getDocs(collection(db, "campaigns"));
+    const campaignsData = querySnapshot.docs.map((doc) => ({
+      uid: doc.id,
+      ...doc.data(),
+    }));
+    return campaignsData;
+  } catch (error) {
+    console.error("Error fetching campaigns:", error);
+  }
+}
+
+export async function getRecommendations(recommendationsIds: any) {
+  try {
+    const q = query(
+      collection(db, "campaigns"),
+      where(documentId(), "in", recommendationsIds)
+    );
+
+    console.log(recommendationsIds);
+
+    const querySnapshot = await getDocs(q);
     const campaignsData = querySnapshot.docs.map((doc) => ({
       uid: doc.id,
       ...doc.data(),

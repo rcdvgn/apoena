@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 import { useAuth } from "../../_contexts/AuthContext";
 import { redirect } from "next/navigation";
@@ -61,6 +62,20 @@ export default function SignUp() {
           </div>
         </div>
       </div>
+
+      <div className="">
+        <span className="text-subtext font-bold text-base">
+          Já possuo conta.{" "}
+        </span>
+
+        <Link
+          className="hover:underline text-primary font-bold text-base"
+          href="/sign-in"
+        >
+          Fazer login
+        </Link>
+      </div>
+
       <div className="">
         <button type="submit" className="w-full h-12 btn-1">
           Criar conta

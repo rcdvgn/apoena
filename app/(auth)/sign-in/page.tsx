@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 import { useAuth } from "../../_contexts/AuthContext";
 
@@ -59,6 +60,19 @@ export default function SignIn() {
             />
           </div>
         </div>
+      </div>
+
+      <div className="">
+        <span className="text-subtext font-bold text-base">
+          Não possuo conta.{" "}
+        </span>
+
+        <Link
+          className="hover:underline text-primary font-bold text-base"
+          href="/sign-up"
+        >
+          Criar conta
+        </Link>
       </div>
 
       <div className="">

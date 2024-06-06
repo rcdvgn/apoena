@@ -1,28 +1,113 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useAuth } from "../../_contexts/AuthContext";
 
-import { createUser } from "../../_actions/actions";
+import { createUser, getCampaigns } from "../../_actions/actions";
 
-import { SaveIcon } from "../../_components/icons";
+import recommendationEngine from "@/app/_utils/recommendationEngine";
+
+const DisplayName = ({
+  name,
+  handleNameChange,
+}: {
+  name: any;
+  handleNameChange: any;
+}) => {
+  return (
+    <input
+      placeholder="Primeiro e ultimo nome"
+      className="w-full input-1"
+      value={name}
+      onChange={handleNameChange}
+    ></input>
+  );
+};
+
+const Types = ({
+  campaignTypes,
+  selectedCampaignTypes,
+  handleCampaignTypeSelection,
+}: {
+  campaignTypes: any;
+  selectedCampaignTypes: any;
+  handleCampaignTypeSelection: any;
+}) => {
+  return (
+    <div className="flex justify-between flex-wrap gap-2">
+      {campaignTypes.map((type: any, index: any) => {
+        return (
+          <div
+            onClick={() => handleCampaignTypeSelection(type)}
+            key={index}
+            className={`capitalize cursor-pointer btn-4 py-2 px-4 mb-4 rounded-full font-semibold text-sm ${
+              selectedCampaignTypes.includes(type)
+                ? "bg-primary text-foreground"
+                : "bg-negative-space text-intratext hover:bg-primary-bg hover:text-primary"
+            }`}
+          >
+            {type}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const Regions = ({
+  campaignRegions,
+  selectedCampaignRegions,
+  handleCampaignRegionSelection,
+}: {
+  campaignRegions: any;
+  selectedCampaignRegions: any;
+  handleCampaignRegionSelection: any;
+}) => {
+  return (
+    <div className="flex justify-between flex-wrap gap-2">
+      {campaignRegions.map((type: any, index: any) => {
+        return (
+          <div
+            onClick={() => handleCampaignRegionSelection(type)}
+            key={index}
+            className={`capitalize cursor-pointer btn-4 py-2 px-4 mb-4 rounded-full font-semibold text-sm ${
+              selectedCampaignRegions.includes(type)
+                ? "bg-primary text-foreground"
+                : "bg-negative-space text-intratext hover:bg-primary-bg hover:text-primary"
+            }`}
+          >
+            {type}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default function CreateAccount() {
-  const { user, setUser } = useAuth();
+  const { user, setUser, campaignTypes } = useAuth();
   const [name, setName] = useState("");
+
   const [selectedCampaignTypes, setSelectedCampaignTypes] = useState<any>([]);
+
+  const [campaigns, setCampaigns] = useState<any>([]);
+  const campaignRegions = campaigns.length
+    ? campaigns
+        .map((camp: any) => camp.affectedRegion)
+        .filter(
+          (value: any, index: any, self: any) => self.indexOf(value) === index
+        )
+    : [];
+
+  const [selectedCampaignRegions, setSelectedCampaignRegions] = useState<any>(
+    []
+  );
+
   const [savedCampaigns, setSavedCampaigns] = useState<any>([]);
 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
   };
-
-  const campaignTypes = [
-    "protecao animal",
-    "reflorestamento",
-    "agricultura",
-    "poluicao sonora",
-  ];
 
   const handleCampaignTypeSelection = (type: any) => {
     if (selectedCampaignTypes.includes(type)) {
@@ -36,83 +121,61 @@ export default function CreateAccount() {
     }
   };
 
+  const handleCampaignRegionSelection = (region: any) => {
+    if (selectedCampaignRegions.includes(region)) {
+      setSelectedCampaignRegions((currSelectedRegions: any) => {
+        return currSelectedRegions.filter((item: any) => item !== region);
+      });
+    } else {
+      selectedCampaignRegions.length < 3
+        ? setSelectedCampaignRegions([region, ...selectedCampaignRegions])
+        : "";
+    }
+  };
+
   const handleCampaignSave = (campaign: any) => {
     console.log(campaign);
   };
+
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      const campaignsData = await getCampaigns();
+      console.log(campaignsData);
+      setCampaigns(campaignsData);
+      // campaignsData !== undefined ? setSelectedCampaign(campaignsData[0]) : "";
+    };
+
+    fetchCampaigns();
+  }, []);
 
   const sections = {
     0: {
       title: "Qual e o seu nome?",
       subtitle:
-        "Pessoas poderao lhe encontrar atraves desse nome, por isso recomendamos nao usar apelidos.",
-      form: (
-        <input
-          placeholder="Primeiro e ultimo nome"
-          className="w-full input-1"
-          value={name}
-          onChange={handleNameChange}
-        ></input>
-      ),
+        "Pessoas poderão lhe encontrar atraves desse nome, por isso recomendamos não usar apelidos.",
+      form: <DisplayName name={name} handleNameChange={handleNameChange} />,
     },
     1: {
-      title: "O que voce procura?",
+      title: "Que tipo de campanha voce procura?",
       subtitle:
         "Escolha 3 tipos de campanhas que voce mais se interessa em apoiar.",
       form: (
-        <div className="flex justify-between flex-wrap gap-2">
-          {campaignTypes.map((type: any, index: any) => {
-            return (
-              <div
-                onClick={() => handleCampaignTypeSelection(type)}
-                key={index}
-                className={`capitalize cursor-pointer btn-4 py-2 px-4 mb-4 rounded-full font-semibold text-sm ${
-                  selectedCampaignTypes.includes(type)
-                    ? "bg-primary text-foreground"
-                    : "bg-negative-space text-intratext hover:bg-primary-bg hover:text-primary"
-                }`}
-              >
-                {type}
-              </div>
-            );
-          })}
-        </div>
+        <Types
+          campaignTypes={campaignTypes}
+          selectedCampaignTypes={selectedCampaignTypes}
+          handleCampaignTypeSelection={handleCampaignTypeSelection}
+        />
       ),
     },
     2: {
-      title: "Bem vindo ao Apoena!",
-      subtitle:
-        "Separamos algumas iniciativas que combinam com voce. Companhas selecionadas agora ficarao salvas no seu perfil, caso decida apoia-las no futuro.",
+      title: "Quais sao as suas regiões de interesse?",
+      subtitle: "Escolha 3 regiões que voce mais se interessa em apoiar.",
       form: (
-        <div className="flex flex-col gap-4">
-          <div className="group rounded-lg p-4 cursor-pointer hover:bg-primary/10">
-            <div className="flex gap-4">
-              <div
-                style={{
-                  backgroundImage: `url(https://images.unsplash.com/photo-1473594659356-a404044aa2c2?q=80&w=426&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
-                }}
-                className="aspect-square h-12 rounded-lg bg-cover bg-center flex-shrink-0"
-              ></div>
-              <div className="">
-                <div className="flex justify-between mb-1">
-                  <span className="text-text text-sm font-extrabold">
-                    Cultivando o Futuro
-                  </span>
-                  <SaveIcon
-                    className="group-hover:visible invisible stroke-primary h-[14px]"
-                    fill={false}
-                  />
-                </div>
-                <div className="line-clamp-3 text-intratext text-[13px] font-medium">
-                  Iniciativa que promove a agricultura familiar sustentável em
-                  comunidades rurais. Oferecemos treinamento em técnicas
-                  agroecológicas, acesso a mercados justos e apoio para a
-                  comercialização de produtos orgânicos.
-                </div>
-              </div>
-            </div>
-            <div className=""></div>
-          </div>
-        </div>
+        <Regions
+          campaignRegions={campaignRegions}
+          selectedCampaignRegions={selectedCampaignRegions}
+          handleCampaignRegionSelection={handleCampaignRegionSelection}
+        />
       ),
     },
   };
@@ -121,6 +184,18 @@ export default function CreateAccount() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    const interests = {
+      types: selectedCampaignTypes,
+      affectedRegions: selectedCampaignRegions,
+    };
+
+    const recommendations = recommendationEngine(campaigns, interests);
+
+    // console.log(recommendations);
+
+    sessionStorage.setItem("firstAccess", JSON.stringify(true));
+    sessionStorage.setItem("recommendations", JSON.stringify(recommendations));
 
     const newUser = await createUser({ ...user, name });
     setUser(newUser);
@@ -149,16 +224,22 @@ export default function CreateAccount() {
             {sections[section].subtitle}
           </div>
         </div>
-        <div className="p-4 flex flex-col gap-2 grow">
+        <div className="p-4 flex flex-col gap-2 overflow-auto">
           {sections[section].form}
         </div>
-        <div className="flex justify-between items-center p-4">
+        <div className="flex justify-between items-center p-4 mt-auto">
           <button className="btn-3" onClick={handlePrev}>
             Voltar
           </button>
-          <button className="btn-3" onClick={handleNext}>
-            Continuar
-          </button>
+          {section === 2 ? (
+            <button className="btn-2" onClick={handleSubmit}>
+              Criar conta
+            </button>
+          ) : (
+            <button className="btn-3" onClick={handleNext}>
+              Continuar
+            </button>
+          )}
         </div>
       </div>
     </div>

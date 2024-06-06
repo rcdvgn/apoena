@@ -17,6 +17,29 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // const router = useRouter();
 
+  const campaignTypes = [
+    "preservacao animal",
+    "reflorestamento",
+    "educacao ambiental",
+    "manejo sustentavel",
+    "recuperacao de nascentes",
+    "agricultura organica",
+    "conservacao de biodiversidade",
+    "ecoturismo",
+    "coleta seletiva",
+    "reciclagem",
+    "energia renovavel",
+    "saneamento basico",
+    "protecao de areas umidas",
+    "agroflorestas",
+    "combate a desertificacao",
+    "gestao de residuos",
+    "protecao de corais",
+    "monitoramento ambiental",
+    "economia circular",
+    "restauracao de ecossistemas",
+  ];
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -85,6 +108,7 @@ export const AuthProvider = ({ children }) => {
         signInWithEmail,
         signUpWithEmail,
         signOff,
+        campaignTypes,
       }}
     >
       {!loading && children}
